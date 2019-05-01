@@ -6,4 +6,13 @@ Two following modes of stimulating conducta are possible:
 * Conductances (with reversal potentials) modelled as Poisson shot noise with an exponential envelope
 * Conductances (with reversal potentials) modelled as an Ohrstein-Uhlenbeck process
 
+The package is written in C++ and wrapped with Cython for high efficiency.
+
+## Installation
+
+Install the package using `pip`:
+```
+pip install matsim
+```
+
 [mat link]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2722979/
