@@ -6,6 +6,8 @@ Two following modes of membrane stimulation are possible:
 * Conductances (with reversal potentials) modelled as Poisson shot noise with an exponential envelope
 * Conductances (with reversal potentials) modelled as an Ohrstein-Uhlenbeck process
 
+![visualization of simulation](https://github.com/Tom83B/matsim/blob/master/examples/intro.png)
+
 The package is written in C++ and wrapped with Cython for high efficiency.
 
 ## Installation
