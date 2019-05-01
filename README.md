@@ -16,6 +16,7 @@ MATSim requires:
 * Python (>= 3.6)
 * NumPy (>= 1.16.3)
 * Pandas (>= 0.24.2)
+
 Although older versions might be sufficient, they haven't been tested.
 
 ### User installation
