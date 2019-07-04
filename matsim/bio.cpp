@@ -208,28 +208,104 @@ void Neuron::timestep(double dt) {
 	}
 }
 
-// int main(int argc, char const *argv[])
-// {
-// 	srand(time(nullptr));
+HHNeuron::HHNeuron() {
+	double g_na = 100;
+	double g_k  = 80;
+	double A = 1e-4;
 
-// 	MATThresholds mat(10, 1, 10, 200, -60, 2);
-// 	vector<MATThresholds*> mats;
-// 	mats.push_back(&mat);
+	this->g_l = 100 * A;
+	this->E_l = -67;
+	this->c_m = 1 * A * 1000.;
+	this->E_na = 50;
+	this->g_na = 100000 * A;
+	this->E_k = -100;
+	this->g_k = 80000 * A;
 
-// 	Neuron neuron(-80, 50, 0.1, mats);
-// 	ShotNoiseConductance exc (10, 0.0015, 0, 3);
-// 	ShotNoiseConductance inh (5, 0.0015, -75, 10);
+	this->V = E_l;
+	this->time = 0;
 
-// 	neuron.append_conductance(&inh);
-// 	neuron.append_conductance(&exc);
+	this->m = 0;
+	this->h = 0;
+	this->n = 0;
+}
 
-// 	for (int i=0; i<10000000; i++) {
-// 		neuron.timestep(0.1);
-// 		if (i % 10000 == 0) cout << i << endl;
-// 		// cout << neuron.voltage << "   " << neuron.mats[0]->threshold << endl;
-// 	}
+void HHNeuron::append_conductance(Conductance* conductance) {
+	conductances.push_back(conductance);
+}
 
-// 	cout << mat.get_spike_times().size();
+void HHNeuron::integrate_voltage(double dt) {
+	double i_syn = 0;
+	double am, ah, an, bm, bh, bn;
+	double i_na, i_k, i_l;
+	double dVdt;
 
-// 	return 0;
-// }
+	for (auto c : conductances) {
+		i_syn += c->get_g() * (c->get_reversal() - V);
+	}
+
+	am = (-0.32 * (V + 54)) / (exp(-(V + 54) / 4) - 1.);
+	bm = (0.28 * (V + 27)) / (exp((V + 27) / 5) - 1.);
+
+	ah = 0.128 * exp(-(V + 50.) / 18.);
+	bh = 4. / (1. + exp(-(V + 27.) / 5.));
+
+	an = (-0.032 * (V + 52.)) / (exp(-(V + 52.) / 5.) - 1.);
+	bn = 0.5 * exp(-(V + 57.) / 40.);
+
+	i_na = g_na * m * m * m * h * (V - E_na);
+	i_k  = g_k  * n * n * n * n * (V - E_k);
+	i_l  = g_l * (V - E_l);
+
+	dVdt = (-i_l - i_na - i_k + i_syn) / c_m;
+	this->V += dVdt * dt;
+	this->m += dt * (am * (1 - m) - bm * m);
+	this->h += dt * (ah * (1 - h) - bh * h);
+	this->n += dt * (an * (1 - n) - bn * n);
+
+	cout << endl;
+	cout << "i_na:   " << i_na << endl;
+	cout << "i_k:   " << i_k << endl;
+	cout << "i_l:   " << i_l << endl;
+	cout << "i_s:   " << i_syn << endl;
+	cout << "V:   " << V << endl;
+	cout << endl;
+
+	cout << endl;
+	cout << "m:   " << m << endl;
+	cout << "h:   " << h << endl;
+	cout << "n:   " << n << endl;
+	cout << endl;
+}
+
+void HHNeuron::timestep(double dt) {
+	time += dt;
+
+	for (auto c : conductances) {
+		c->update(dt);
+	}
+
+	this->integrate_voltage(dt);
+}
+
+int main(int argc, char const *argv[])
+{
+	srand(time(nullptr));
+
+	HHNeuron neuron;
+	ShotNoiseConductance exc (10, 0.0015, 0, 3);
+	ShotNoiseConductance inh (5, 0.0015, -75, 10);
+
+	neuron.append_conductance(&inh);
+	neuron.append_conductance(&exc);
+
+	for (int i=0; i<10000; i++) {
+		neuron.timestep(0.025);
+		cout << i << endl;
+		// if (i % 10000 == 0) cout << i << endl;
+		// cout << neuron.voltage << "   " << neuron.mats[0]->threshold << endl;
+	}
+
+	// cout << mat.get_spike_times().size();
+
+	return 0;
+}
