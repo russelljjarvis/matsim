@@ -39,6 +39,13 @@ cdef extern from "bio.h":
         vector[MATThresholds*] mats
         double voltage, time
 
+    cdef cppclass HHNeuron:
+        HHNeuron() except +
+        void append_conductance(Conductance)
+        void timestep(double)
+        vector[Conductance*] conductances
+        double V, time
+
 cdef extern from "simulation.cpp":
     vector[int] sr_experiment(Neuron neuron, double time_window, double dt,
                        vector[double] exc_intensities, vector[double] inh_intensities, int seed)
