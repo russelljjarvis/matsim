@@ -22,9 +22,23 @@ MATSim requires:
 Although older versions might be sufficient, they haven't been tested.
 
 ### User installation
+
+#### Using pip
+
 Install the package using `pip`:
 ```
 pip install matsim
+```
+
+#### Compilation from source
+
+First, use Cython to create the file `matsim.cpp` (in the directory `matsim`):
+```
+cython --cplus matsim.pyx
+```
+Then use the setup file to install the package:
+```
+python setup.py install
 ```
 
 [mat link]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2722979/
