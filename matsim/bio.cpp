@@ -260,19 +260,19 @@ void HHNeuron::integrate_voltage(double dt) {
 	this->h += dt * (ah * (1 - h) - bh * h);
 	this->n += dt * (an * (1 - n) - bn * n);
 
-	cout << endl;
-	cout << "i_na:   " << i_na << endl;
-	cout << "i_k:   " << i_k << endl;
-	cout << "i_l:   " << i_l << endl;
-	cout << "i_s:   " << i_syn << endl;
-	cout << "V:   " << V << endl;
-	cout << endl;
+	// cout << endl;
+	// cout << "i_na:   " << i_na << endl;
+	// cout << "i_k:   " << i_k << endl;
+	// cout << "i_l:   " << i_l << endl;
+	// cout << "i_s:   " << i_syn << endl;
+	// cout << "V:   " << V << endl;
+	// cout << endl;
 
-	cout << endl;
-	cout << "m:   " << m << endl;
-	cout << "h:   " << h << endl;
-	cout << "n:   " << n << endl;
-	cout << endl;
+	// cout << endl;
+	// cout << "m:   " << m << endl;
+	// cout << "h:   " << h << endl;
+	// cout << "n:   " << n << endl;
+	// cout << endl;
 }
 
 void HHNeuron::timestep(double dt) {
