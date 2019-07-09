@@ -18,18 +18,12 @@ with open("README.md", "r") as fh:
 
 setup(
 	name = 'matsim',
-	version = '0.2.3',
+	version = '0.3.0',
 	author = "Tomas Barta",
 	author_email = "tomas.barta@fgu.cas.cz",
 	description = "Package primarily for simulation of MAT model",
 	long_description = long_description,
-	# ext_modules = [
-	# 	Extension('matsim'),
-	# 	sources=['matsim.pyx'],
-	# 	extra_compile_args=compile_extra_args,
-	# 	extra_link_args
-	# ],
-	# ext_modules=cythonize("matsim/matsim.pyx"),
+	url = "https://github.com/Tom83B/matsim",
 	ext_modules = [Extension(
 		"matsim",
 		sources=["matsim/matsim.cpp"],

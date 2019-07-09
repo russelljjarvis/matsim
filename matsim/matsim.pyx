@@ -8,6 +8,7 @@ from matsim_cth cimport OUConductance as COUConductance
 from matsim_cth cimport Conductance as CConductance
 from matsim_cth cimport MATThresholds as CMATThresholds
 from matsim_cth cimport Neuron as CNeuron
+from matsim_cth cimport HHNeuron as CHHNeuron
 from matsim_cth cimport sr_experiment as _sr_experiment
 from matsim_cth cimport sr_experiment_spike_times as _sr_experiment_spike_times
 
@@ -108,6 +109,32 @@ cdef class Neuron:
     @property
     def voltage(self):
         return self.neuron.voltage
+
+    @property
+    def time(self):
+        return self.neuron.time
+    @time.setter
+    def time(self, time):
+        self.neuron.time = time
+
+
+cdef class HHNeuron:
+    cdef CHHNeuron neuron
+
+    def __cinit__(self):
+        self.neuron = CHHNeuron()
+        # self.mats = mats
+
+    def append_conductance(self, Conductance cond):
+        self.neuron.conductances.push_back(cond.conductance)
+
+    cpdef void timestep(self, double dt):
+        self.neuron.timestep(dt)
+
+    # Attribute access
+    @property
+    def voltage(self):
+        return self.neuron.V
 
     @property
     def time(self):

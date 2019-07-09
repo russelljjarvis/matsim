@@ -67,4 +67,16 @@ class Neuron {
 
 };
 
+class HHNeuron {
+	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, m, h, n;
+
+	public:
+		HHNeuron();
+		void append_conductance(Conductance*);
+		void integrate_voltage(double);
+		void timestep(double);
+		vector<Conductance*> conductances;
+		double V, time;
+};
+
 #endif
