@@ -105,13 +105,15 @@ void OUConductance::set_rate(double rate) {
 	this->sigma = sqrt(decay * rate / 2) * g_peak;
 }
 
-MATThresholds::MATThresholds(double alpha1, double alpha2, double tau1, double tau2, double omega, double refractory_period) {
+MATThresholds::MATThresholds(double alpha1, double alpha2, double tau1, double tau2,\
+	double omega, double refractory_period, bool resetting = false) {
 	this->alpha1 = alpha1;
 	this->alpha2 = alpha2;
 	this->tau1 = tau1;
 	this->tau2 = tau2;
 	this->omega = omega;
 	this->refractory_period = refractory_period;
+	this->resetting = resetting;
 
 	t1 = 0;
 	t2 = 0;
@@ -166,29 +168,15 @@ void Neuron::integrate_voltage(double dt) {
 	double tot_gr = 0;
 	double factor, v_bar, tau;
 
-	// for (int i=0; i<conductances.size(); i++) {
 	for (auto c : conductances) {
 		tot_conductance += c->get_g();
-
-		// cout << "conductance " << i << ":  " << conductances[i]->g << endl;
-		// cout << conductances[i]->reversal << ":  " << tot_conductance << "   ";
 		tot_gr += c->get_g() * c->get_reversal();
 	}
-	// cout << endl;
 
 	v_bar = (resting_potential + membrane_resistance * tot_gr) / (1 + membrane_resistance * tot_conductance);
 	tau = time_constant / (1 + membrane_resistance * tot_conductance);
 
-	// cout << "tot_cond:  " << tot_conductance << endl;
-	// cout << "vbar:      " << v_bar << endl;
-	// cout << "voltage:   " << voltage << endl;
-
 	voltage = v_bar + (voltage - v_bar) * exp(-dt / tau);
-
-	//// factor = 1. / dt + (1. + membrane_resistance * tot_conductance) / time_constant;
-	// cout << voltage << "   factor: " << factor << "   dt: " << dt << "   tot_cond: " << tot_conductance << "   ";
-    //// voltage = (voltage / dt + (resting_potential + membrane_resistance * tot_gr) / time_constant) / factor;
-    // cout << voltage << endl;
 }
 
 void Neuron::timestep(double dt) {
@@ -204,6 +192,10 @@ void Neuron::timestep(double dt) {
 		mat->update(dt);
 		if (mat->threshold <= voltage) {
 			mat->fire(time);
+			
+			if (mat->resetting == true) {
+				this->voltage = this->resting_potential;
+			}
 		}
 	}
 }

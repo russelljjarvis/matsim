@@ -44,12 +44,13 @@ class MATThresholds {
 
 	public:
 		MATThresholds();
-		MATThresholds(double, double, double, double, double, double);
+		MATThresholds(double, double, double, double, double, double, bool);
 		void fire(double);
 		void update(double);
 		vector<double> get_spike_times();
 		void reset_spike_times();
 		double threshold;
+		bool resetting;
 };
 
 class Neuron {

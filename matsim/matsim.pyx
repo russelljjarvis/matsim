@@ -62,8 +62,9 @@ cdef class MATThresholds:
     cdef string name
 
     def __cinit__(self, double alpha1, double alpha2, double tau1, double tau2, double omega,
-            double refractory_period, name):
-        self.mat = new CMATThresholds(alpha1, alpha2, tau1, tau2, omega, refractory_period)
+            double refractory_period, name, resetting=False):
+        self.mat = new CMATThresholds(alpha1, alpha2, tau1, tau2, omega,
+            refractory_period, resetting)
         self.name = <string> name.encode('utf-8')
 
     def __dealloc__(self):
@@ -87,7 +88,8 @@ cdef class Neuron:
     cdef CNeuron neuron
     cdef vector[string] mat_names
 
-    def __cinit__(self, double resting_potential, double membrane_resistance, double membrane_capacitance, mats):
+    def __cinit__(self, double resting_potential, double membrane_resistance,
+        double membrane_capacitance, mats):
         # cdef MATThresholds* c_mat
         cdef MATThresholds mat
         cdef vector[CMATThresholds*] mat_vec

@@ -25,7 +25,7 @@ cdef extern from "bio.h":
 
     cdef cppclass MATThresholds:
         MATThresholds() except +
-        MATThresholds(double, double, double, double, double, double) except +
+        MATThresholds(double, double, double, double, double, double, bool) except +
         vector[double] get_spike_times()
         void reset_spike_times()
         double threshold
