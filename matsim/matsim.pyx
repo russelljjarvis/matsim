@@ -2,6 +2,7 @@
 
 from libcpp.vector cimport vector
 from libcpp.string cimport string
+from libcpp cimport bool
 from cython.operator cimport dereference as deref
 from matsim_cth cimport ShotNoiseConductance as CShotNoiseConductance
 from matsim_cth cimport OUConductance as COUConductance

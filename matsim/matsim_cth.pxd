@@ -1,4 +1,5 @@
 from libcpp.vector cimport vector
+from libcpp cimport bool
 
 cdef extern from "bio.cpp":
     pass
@@ -29,6 +30,7 @@ cdef extern from "bio.h":
         vector[double] get_spike_times()
         void reset_spike_times()
         double threshold
+        bool resetting
 
     cdef cppclass Neuron:
         Neuron() except +
