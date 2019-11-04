@@ -203,13 +203,13 @@ void Neuron::timestep(double dt) {
 HHNeuron::HHNeuron() {
 	double A = 1e-4;
 
-	this->g_l = 100 * A;
-	this->E_l = -67;
+	this->g_l = 0.3 * 1000 * A;
+	this->E_l = -65;
 	this->c_m = 1 * A * 1000.;
-	this->E_na = 50;
-	this->g_na = 100000 * A;
-	this->E_k = -100;
-	this->g_k = 80000 * A;
+	this->E_na = 55;
+	this->g_na = 40 * 1000. * A;
+	this->E_k = -77;
+	this->g_k = 35 * 1000 * A;
 
 	this->V = E_l;
 	this->time = 0;
@@ -233,14 +233,14 @@ void HHNeuron::integrate_voltage(double dt) {
 		i_syn += c->get_g() * (c->get_reversal() - V);
 	}
 
-	am = (-0.32 * (V + 54)) / (exp(-(V + 54) / 4) - 1.);
-	bm = (0.28 * (V + 27)) / (exp((V + 27) / 5) - 1.);
+	am = (0.182 * (V + 35)) / (1 - exp(-(V + 35) / 9));
+	bm = -(0.124 * (V + 35)) / (1 - exp((V + 35) / 9));
 
-	ah = 0.128 * exp(-(V + 50.) / 18.);
-	bh = 4. / (1. + exp(-(V + 27.) / 5.));
+	ah = 0.25 * exp(-(V + 90.) / 12.);
+	bh = 0.25 * exp(-(V + 62.) / 6.) / exp((V + 90.) / 12.);
 
-	an = (-0.032 * (V + 52.)) / (exp(-(V + 52.) / 5.) - 1.);
-	bn = 0.5 * exp(-(V + 57.) / 40.);
+	an = (0.02 * (V - 25.) / 9.) / (1 - exp(-(V - 25.) / 9.));
+	bn = -0.002 * (V - 25.) / (1 - exp((V - 25.) / 9));
 
 	i_na = g_na * m * m * m * h * (V - E_na);
 	i_k  = g_k  * n * n * n * n * (V - E_k);
