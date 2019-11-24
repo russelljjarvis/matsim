@@ -4,14 +4,15 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp cimport bool
 from cython.operator cimport dereference as deref
-from .matsim_cth cimport ShotNoiseConductance as CShotNoiseConductance
-from .matsim_cth cimport OUConductance as COUConductance
-from .matsim_cth cimport Conductance as CConductance
-from .matsim_cth cimport MATThresholds as CMATThresholds
-from .matsim_cth cimport Neuron as CNeuron
-from .matsim_cth cimport HHNeuron as CHHNeuron
-from .matsim_cth cimport sr_experiment as _sr_experiment
-from .matsim_cth cimport sr_experiment_spike_times as _sr_experiment_spike_times
+from matsim_cth cimport ExponentialConductance as CExponentialConductance
+from matsim_cth cimport ShotNoiseConductance as CShotNoiseConductance
+from matsim_cth cimport OUConductance as COUConductance
+from matsim_cth cimport Conductance as CConductance
+from matsim_cth cimport MATThresholds as CMATThresholds
+from matsim_cth cimport Neuron as CNeuron
+from matsim_cth cimport HHNeuron as CHHNeuron
+from matsim_cth cimport sr_experiment as _sr_experiment
+from matsim_cth cimport sr_experiment_spike_times as _sr_experiment_spike_times
 
 import numpy as np
 import pandas as pd
