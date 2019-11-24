@@ -4,6 +4,7 @@ using namespace std;
 
 class Conductance {
 	double g, reversal;
+	bool spike_activated;
 
 	public:
 		virtual void update(double);
@@ -12,8 +13,22 @@ class Conductance {
 		virtual double get_reversal();
 };
 
+class ExponentialConductance: public Conductance {
+	double g_peak, decay, g, reversal;
+	bool spike_activated;
+
+	public:
+		ExponentialConductance();
+		ExponentialConductance(double, double, double);
+		void update(double);
+		void activate();
+		void get_g();
+		void get_reversal();
+}
+
 class ShotNoiseConductance: public Conductance {
 	double rate, g_peak, decay, g, reversal;
+	bool spike_activated;
 
 	public:
 		ShotNoiseConductance();
@@ -26,6 +41,7 @@ class ShotNoiseConductance: public Conductance {
 
 class OUConductance: public Conductance {
 	double rate, g_peak, decay, g, reversal;
+	bool spike_activated;
 	double mean, sigma, D;
 	double get_A(double);
 

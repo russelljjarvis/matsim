@@ -10,6 +10,11 @@ cdef extern from "bio.h":
         void set_rate(double)
         double get_g()
 
+    cdef cppclass ExponentialConductance(Conductance):
+        ExponentialConductance(double, double, double) except +
+        double get_g()
+        double reversal
+
     cdef cppclass ShotNoiseConductance(Conductance):
         # ShotNoiseConductance() except +
         ShotNoiseConductance(double, double, double, double) except +
