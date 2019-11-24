@@ -48,29 +48,28 @@ double ExponentialConductance::get_g() {return this->g;}
 double ExponentialConductance::get_reversal() {return this->reversal;}
 
 ExponentialConductance::ExponentialConductance(double g_peak, double reversal, double decay) {
-	this->spike_activated = true;
 	this->g_peak = g_peak;
 	this->reversal = reversal;
 	this->decay = decay;
 	this->g = 0;
 }
 
-ExponentialConductance::update(double dt) {
+void ExponentialConductance::update(double dt) {
 	g *= exp(-dt / decay);
 }
 
-ExponentialConductance::activate() {
+void ExponentialConductance::activate() {
 	g += g_peak;
 }
 
 ShotNoiseConductance::ShotNoiseConductance() {}
 double ShotNoiseConductance::get_g() {return this->g;}
 double ShotNoiseConductance::get_reversal() {return this->reversal;}
+void ShotNoiseConductance::activate() { }
 
 ShotNoiseConductance::ShotNoiseConductance(double rate, double g_peak, double reversal, double decay) {
 	srand(std::time(nullptr));
 
-	this->spike_activated = false;
 	this->rate = rate;
 	this->g_peak = g_peak;
 	this->reversal = reversal;
@@ -92,11 +91,11 @@ void ShotNoiseConductance::set_rate(double rate) {
 OUConductance::OUConductance() {}
 double OUConductance::get_g() {return this->g;}
 double OUConductance::get_reversal() {return this->reversal;}
+void OUConductance::activate() { }
 
 OUConductance::OUConductance(double rate, double g_peak, double reversal, double decay) {
 	srand(std::time(nullptr));
 
-	this->spike_activated = false;
 	this->rate = rate;
 	this->g_peak = g_peak;
 	this->reversal = reversal;
@@ -220,10 +219,8 @@ void Neuron::timestep(double dt) {
 			}
 
 			for (auto c : conductances) {
-				if (c->spike_activated == true) {
-					c->activate();
-				}
-	}
+				c->activate();
+			}
 		}
 	}
 }
