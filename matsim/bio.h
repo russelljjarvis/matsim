@@ -78,6 +78,7 @@ class HHNeuron {
 		void timestep(double);
 		vector<Conductance*> conductances;
 		double V, time;
+		double i_na, i_k, i_l;
 };
 
 #endif

@@ -18,7 +18,7 @@ with open("README.md", "r") as fh:
 
 setup(
 	name = 'matsim',
-	version = '0.3.0',
+	version = '0.3.1',
 	author = "Tomas Barta",
 	author_email = "tomas.barta@fgu.cas.cz",
 	description = "Package primarily for simulation of MAT model",

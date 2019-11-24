@@ -82,7 +82,6 @@ OUConductance::OUConductance(double rate, double g_peak, double reversal, double
 
 	this->set_rate(rate);
 	this->g = this->mean;
-	this->D = 2 * (sigma * sigma) / decay;
 	// cout << normal_rand() << endl;
 	// cout << g << endl;
 }
@@ -103,6 +102,7 @@ void OUConductance::set_rate(double rate) {
 	// cout << "funguju?";
 	this->mean = decay * g_peak * rate;
 	this->sigma = sqrt(decay * rate / 2) * g_peak;
+	this->D = 2 * (sigma * sigma) / decay;
 }
 
 MATThresholds::MATThresholds(double alpha1, double alpha2, double tau1, double tau2,\
@@ -203,13 +203,13 @@ void Neuron::timestep(double dt) {
 HHNeuron::HHNeuron() {
 	double A = 1e-4;
 
-	this->g_l = 0.3 * 1000 * A;
-	this->E_l = -65;
+	this->g_l = 0.045 * 1000 * A;
+	this->E_l = -80;
 	this->c_m = 1 * A * 1000.;
-	this->E_na = 55;
-	this->g_na = 40 * 1000. * A;
-	this->E_k = -77;
-	this->g_k = 35 * 1000 * A;
+	this->E_na = 50;
+	this->g_na = 50 * 1000. * A;
+	this->E_k = -90;
+	this->g_k = 5 * 1000 * A;
 
 	this->V = E_l;
 	this->time = 0;
@@ -217,6 +217,10 @@ HHNeuron::HHNeuron() {
 	this->m = 0;
 	this->h = 0;
 	this->n = 0;
+
+	this->i_na = 0;
+	this->i_k = 0;
+	this->i_l = 0;
 }
 
 void HHNeuron::append_conductance(Conductance* conductance) {
@@ -226,27 +230,37 @@ void HHNeuron::append_conductance(Conductance* conductance) {
 void HHNeuron::integrate_voltage(double dt) {
 	double i_syn = 0;
 	double am, ah, an, bm, bh, bn;
-	double i_na, i_k, i_l;
 	double dVdt;
+	
+	double VT = -58;
+	double VS = -10;
 
 	for (auto c : conductances) {
 		i_syn += c->get_g() * (c->get_reversal() - V);
 	}
+	
+	am = -0.32 * (V - VT - 13) / (exp(-(V - VT - 13) / 4) - 1);
+	bm = 0.28 * (V - VT - 40) / (exp((V - VT - 40) / 5) - 1);
 
-	am = (0.182 * (V + 35)) / (1 - exp(-(V + 35) / 9));
-	bm = -(0.124 * (V + 35)) / (1 - exp((V + 35) / 9));
+	ah = 0.128 * exp(-(V - VT - VS - 17) / 18);
+	bh = 4 / (1 + exp(-(V - VT - VS - 40) / 5));
 
-	ah = 0.25 * exp(-(V + 90.) / 12.);
-	bh = 0.25 * exp((V + 62.) / 6.) / exp((V + 90.) / 12.);
+	an = -0.032 * (V - VT - 15) / (exp(-(V - VT - 15) / 5) - 1);
+	bn = 0.5 * exp(-(V - VT - 10) / 40);
+	// am = (0.182 * (V + 35)) / (1 - exp(-(V + 35) / 9));
+	// bm = -(0.124 * (V + 35)) / (1 - exp((V + 35) / 9));
 
-	an = (0.02 * (V - 25.) / 9.) / (1 - exp(-(V - 25.) / 9.));
-	bn = -0.002 * (V - 25.) / (1 - exp((V - 25.) / 9));
+	// ah = 0.25 * exp(-(V + 90.) / 12.);
+	// bh = 0.25 * exp((V + 62.) / 6.) / exp((V + 90.) / 12.);
 
-	i_na = g_na * m * m * m * h * (V - E_na);
-	i_k  = g_k  * n * n * n * n * (V - E_k);
-	i_l  = g_l * (V - E_l);
+	// an = (0.02 * (V - 25.) / 9.) / (1 - exp(-(V - 25.) / 9.));
+	// bn = -0.002 * (V - 25.) / (1 - exp((V - 25.) / 9));
 
-	dVdt = (-i_l - i_na - i_k + i_syn) / c_m;
+	this->i_na = g_na * m * m * m * h * (V - E_na);
+	this->i_k  = g_k  * n * n * n * n * (V - E_k);
+	this->i_l  = g_l * (V - E_l);
+
+	dVdt = (-this->i_l - this->i_na - this->i_k + i_syn) / c_m;
 	this->V += dVdt * dt;
 	this->m += dt * (am * (1 - m) - bm * m);
 	this->h += dt * (ah * (1 - h) - bh * h);
