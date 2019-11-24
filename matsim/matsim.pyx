@@ -30,6 +30,13 @@ cdef class Conductance:
     def g(self):
         return deref(self.conductance).get_g()
 
+cdef class ExponentialConductance(Conductance):
+    def __cinit__(self, double g_peak, double reversal, double decay):
+        self.conductance = new CExponentialConductance(g_peak, reversal, decay)
+
+    def __dealloc__(self):
+        del self.conductance
+
 cdef class ShotNoiseConductance(Conductance):
     # cdef CShotNoiseConductance* conductance  # Hold a C++ instance which we're wrapping
 
