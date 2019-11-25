@@ -2,7 +2,7 @@ import platform
 from setuptools import setup, Extension
 # from distutils.core import setup
 # from distutils.extension import Extension
-# from Cython.Build import cythonize
+from Cython.Build import cythonize
 
 compile_extra_args = []
 link_extra_args = []
@@ -16,9 +16,10 @@ elif platform.system() == "Darwin":
 with open("README.md", "r") as fh:
 	long_description = fh.read()
 
+
 setup(
 	name = 'matsim',
-	version = '0.3.1',
+	version = '0.3.2',
 	author = "Tomas Barta",
 	author_email = "tomas.barta@fgu.cas.cz",
 	description = "Package primarily for simulation of MAT model",
@@ -28,7 +29,7 @@ setup(
 		"matsim",
 		sources=["matsim/matsim.cpp"],
 	    extra_compile_args = compile_extra_args,
-        extra_link_args = link_extra_args
+        extra_link_args = link_extra_args,
 	)],
 	package_data = {'matsim': ["matsim/bio.h", "matsim/simulation.h",
 	    "matsim/bio.cpp","matsim/simulation.cpp"]}

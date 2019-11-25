@@ -1,4 +1,4 @@
-from .matsim import MATThresholds
+from matsim import MATThresholds
 
 thresholds = [-65, -64.3, -62.4, -61.8]
 

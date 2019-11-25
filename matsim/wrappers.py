@@ -1,4 +1,4 @@
-from .matsim import MATThresholds, Neuron
+from matsim import MATThresholds, Neuron
 
 class LIF:
 	def __init__(self, V_r=-80, R=50, C=0.1, V_thr=-60):

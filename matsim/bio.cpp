@@ -42,6 +42,7 @@ void Conductance::update(double dt) { }
 void Conductance::set_rate(double rate) { }
 double Conductance::get_g() {return 0;}
 double Conductance::get_reversal() {return 0;}
+void Conductance::activate() { }
 
 ExponentialConductance::ExponentialConductance() {}
 double ExponentialConductance::get_g() {return this->g;}
@@ -218,9 +219,9 @@ void Neuron::timestep(double dt) {
 				this->voltage = this->resting_potential;
 			}
 
-			for (auto c : conductances) {
-				c->activate();
-			}
+			// for (auto c : conductances) {
+			// 	c->activate();
+			// }
 		}
 	}
 }
