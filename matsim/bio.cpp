@@ -219,9 +219,9 @@ void Neuron::timestep(double dt) {
 				this->voltage = this->resting_potential;
 			}
 
-			// for (auto c : conductances) {
-			// 	c->activate();
-			// }
+			for (auto c : conductances) {
+				c->activate();
+			}
 		}
 	}
 }
