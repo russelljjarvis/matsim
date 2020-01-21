@@ -160,6 +160,10 @@ cdef class HHNeuron:
         return self.neuron.i_l
 
     @property
+    def i_m(self):
+        return self.neuron.i_m
+
+    @property
     def time(self):
         return self.neuron.time
     @time.setter

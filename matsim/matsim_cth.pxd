@@ -53,7 +53,7 @@ cdef extern from "bio.h":
         void timestep(double)
         vector[Conductance*] conductances
         double V, time
-        double i_na, i_k, i_l
+        double i_na, i_k, i_l, i_m
 
 cdef extern from "simulation.cpp":
     vector[int] sr_experiment(Neuron neuron, double time_window, double dt,
