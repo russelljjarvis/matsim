@@ -132,8 +132,8 @@ cdef class Neuron:
 cdef class HHNeuron:
     cdef CHHNeuron neuron
 
-    def __cinit__(self):
-        self.neuron = CHHNeuron()
+    def __cinit__(self, adaptation):
+        self.neuron = CHHNeuron(adaptation)
         # self.mats = mats
 
     def append_conductance(self, Conductance cond):

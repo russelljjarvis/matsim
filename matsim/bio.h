@@ -80,20 +80,21 @@ class Neuron {
 		vector<Conductance*> conductances;
 		vector<MATThresholds*> mats;
 		double voltage, time;
-
 };
 
 class HHNeuron {
-	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, m, h, n;
+	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, g_m, m, h, n, p;
+	bool adaptation;
 
 	public:
 		HHNeuron();
+		HHNeuron(bool);
 		void append_conductance(Conductance*);
 		void integrate_voltage(double);
 		void timestep(double);
 		vector<Conductance*> conductances;
 		double V, time;
-		double i_na, i_k, i_l;
+		double i_na, i_k, i_l, i_m;
 };
 
 #endif

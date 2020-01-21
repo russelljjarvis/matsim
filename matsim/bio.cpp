@@ -226,7 +226,9 @@ void Neuron::timestep(double dt) {
 	}
 }
 
-HHNeuron::HHNeuron() {
+HHNeuron::HHNeuron() {}
+
+HHNeuron::HHNeuron(bool adaptation) {
 	double A = 1e-4;
 
 	this->g_l = 0.045 * 1000 * A;
@@ -236,6 +238,7 @@ HHNeuron::HHNeuron() {
 	this->g_na = 50 * 1000. * A;
 	this->E_k = -90;
 	this->g_k = 5 * 1000 * A;
+	this->g_m = 0.07 * 1000 * A;
 
 	this->V = E_l;
 	this->time = 0;
@@ -243,10 +246,14 @@ HHNeuron::HHNeuron() {
 	this->m = 0;
 	this->h = 0;
 	this->n = 0;
+	this->p = 0;
 
 	this->i_na = 0;
 	this->i_k = 0;
 	this->i_l = 0;
+	this->i_m = 0;
+
+	this->adaptation = adaptation;
 }
 
 void HHNeuron::append_conductance(Conductance* conductance) {
@@ -255,15 +262,14 @@ void HHNeuron::append_conductance(Conductance* conductance) {
 
 void HHNeuron::integrate_voltage(double dt) {
 	double i_syn = 0;
-	double am, ah, an, bm, bh, bn;
+	double am, ah, an, ap, bm, bh, bn, bp;
+	double tot_conductance = 0;
+	double E0, g_na_t, g_k_t, tau;
+
 	double dVdt;
 	
 	double VT = -58;
 	double VS = -10;
-
-	for (auto c : conductances) {
-		i_syn += c->get_g() * (c->get_reversal() - V);
-	}
 	
 	am = -0.32 * (V - VT - 13) / (exp(-(V - VT - 13) / 4) - 1);
 	bm = 0.28 * (V - VT - 40) / (exp((V - VT - 40) / 5) - 1);
@@ -273,6 +279,9 @@ void HHNeuron::integrate_voltage(double dt) {
 
 	an = -0.032 * (V - VT - 15) / (exp(-(V - VT - 15) / 5) - 1);
 	bn = 0.5 * exp(-(V - VT - 10) / 40);
+
+	ap = 0.0001 * (V + 30) / (1 - exp(-(V + 30) / 9));
+	bp = -0.0001 * (V + 30) / (1 - exp((V + 30) / 9));
 	// am = (0.182 * (V + 35)) / (1 - exp(-(V + 35) / 9));
 	// bm = -(0.124 * (V + 35)) / (1 - exp((V + 35) / 9));
 
@@ -282,15 +291,40 @@ void HHNeuron::integrate_voltage(double dt) {
 	// an = (0.02 * (V - 25.) / 9.) / (1 - exp(-(V - 25.) / 9.));
 	// bn = -0.002 * (V - 25.) / (1 - exp((V - 25.) / 9));
 
+	tot_conductance += this->g_l;
+	E0 += this->g_l * this->E_l;
+
+	for (auto c : conductances) {
+		tot_conductance += c->get_g();
+		E0 += c->get_g() * c->get_reversal();
+	}
+
+	g_na_t = g_na * m * m * m * h;
+	g_k_t = g_k * n * n * n * n;
+
+	tot_conductance += g_na_t + g_k_t;
+	E0 += g_na_t * E_na + g_k_t * E_k;
+	E0 = E0 / tot_conductance;
+
+	tau = c_m / tot_conductance;
+
 	this->i_na = g_na * m * m * m * h * (V - E_na);
 	this->i_k  = g_k  * n * n * n * n * (V - E_k);
 	this->i_l  = g_l * (V - E_l);
+	this->i_m  = g_m * p * (V - E_k);
 
-	dVdt = (-this->i_l - this->i_na - this->i_k + i_syn) / c_m;
+	if (this->adaptation) {
+		dVdt = (-this->i_l - this->i_na - this->i_k - this->i_m + i_syn) / c_m;
+	}
+	else {
+		dVdt = (-this->i_l - this->i_na - this->i_k + i_syn) / c_m;
+	}
+	
 	this->V += dVdt * dt;
 	this->m += dt * (am * (1 - m) - bm * m);
 	this->h += dt * (ah * (1 - h) - bh * h);
 	this->n += dt * (an * (1 - n) - bn * n);
+	this->p += dt * (ap * (1 - p) - bp * p);
 
 	// cout << endl;
 	// cout << "i_na:   " << i_na << endl;
