@@ -297,6 +297,7 @@ void HHNeuron::integrate_voltage(double dt) {
 	for (auto c : conductances) {
 		tot_conductance += c->get_g();
 		E0 += c->get_g() * c->get_reversal();
+		i_syn += c->get_g() * (V - c->get_reversal());
 	}
 
 	g_na_t = g_na * m * m * m * h;
@@ -314,10 +315,10 @@ void HHNeuron::integrate_voltage(double dt) {
 	this->i_m  = g_m * p * (V - E_k);
 
 	if (this->adaptation) {
-		dVdt = (-this->i_l - this->i_na - this->i_k - this->i_m + i_syn) / c_m;
+		dVdt = (-this->i_l - this->i_na - this->i_k - this->i_m - i_syn) / c_m;
 	}
 	else {
-		dVdt = (-this->i_l - this->i_na - this->i_k + i_syn) / c_m;
+		dVdt = (-this->i_l - this->i_na - this->i_k - i_syn) / c_m;
 	}
 	
 	this->V += dVdt * dt;

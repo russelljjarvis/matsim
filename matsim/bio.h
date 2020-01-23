@@ -83,7 +83,7 @@ class Neuron {
 };
 
 class HHNeuron {
-	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, g_m, m, h, n, p;
+	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, g_m;
 	bool adaptation;
 
 	public:
@@ -95,6 +95,7 @@ class HHNeuron {
 		vector<Conductance*> conductances;
 		double V, time;
 		double i_na, i_k, i_l, i_m;
+		double m, h, n, p;
 };
 
 #endif

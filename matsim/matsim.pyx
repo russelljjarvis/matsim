@@ -164,6 +164,12 @@ cdef class HHNeuron:
         return self.neuron.i_m
 
     @property
+    def gate_vars(self):
+        return np.array([
+            self.neuron.m, self.neuron.h, self.neuron.n, self.neuron.p
+            ])
+
+    @property
     def time(self):
         return self.neuron.time
     @time.setter
