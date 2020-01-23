@@ -132,7 +132,7 @@ cdef class Neuron:
 cdef class HHNeuron:
     cdef CHHNeuron neuron
 
-    def __cinit__(self, adaptation):
+    def __cinit__(self, adaptation=0.07):
         self.neuron = CHHNeuron(adaptation)
         # self.mats = mats
 

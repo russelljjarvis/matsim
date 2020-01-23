@@ -48,7 +48,7 @@ cdef extern from "bio.h":
 
     cdef cppclass HHNeuron:
         HHNeuron() except +
-        HHNeuron(bool) except +
+        HHNeuron(double) except +
         void append_conductance(Conductance)
         void timestep(double)
         vector[Conductance*] conductances

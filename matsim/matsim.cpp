@@ -1735,6 +1735,7 @@ static PyObject *__pyx_tp_new_6matsim_6matsim_OUConductance(PyTypeObject *t, PyO
 static PyObject *__pyx_tp_new_6matsim_6matsim_MATThresholds(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6matsim_6matsim_Neuron(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6matsim_6matsim_HHNeuron(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_float_0_07;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_neg_1;
@@ -4156,7 +4157,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_6Neuron_8__setstate_cython__(CYTHON_UN
 /* "matsim/matsim.pyx":135
  *     cdef CHHNeuron neuron
  * 
- *     def __cinit__(self, adaptation):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, adaptation=0.07):             # <<<<<<<<<<<<<<
  *         self.neuron = CHHNeuron(adaptation)
  *         # self.mats = mats
  */
@@ -4171,6 +4172,7 @@ static int __pyx_pw_6matsim_6matsim_8HHNeuron_1__cinit__(PyObject *__pyx_v_self,
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_adaptation,0};
     PyObject* values[1] = {0};
+    values[0] = ((PyObject *)__pyx_float_0_07);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -4183,22 +4185,27 @@ static int __pyx_pw_6matsim_6matsim_8HHNeuron_1__cinit__(PyObject *__pyx_v_self,
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_adaptation)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_adaptation);
+          if (value) { values[0] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 135, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
     __pyx_v_adaptation = values[0];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 135, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 135, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("matsim.matsim.HHNeuron.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4214,18 +4221,18 @@ static int __pyx_pw_6matsim_6matsim_8HHNeuron_1__cinit__(PyObject *__pyx_v_self,
 static int __pyx_pf_6matsim_6matsim_8HHNeuron___cinit__(struct __pyx_obj_6matsim_6matsim_HHNeuron *__pyx_v_self, PyObject *__pyx_v_adaptation) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  bool __pyx_t_1;
+  double __pyx_t_1;
   HHNeuron __pyx_t_2;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "matsim/matsim.pyx":136
  * 
- *     def __cinit__(self, adaptation):
+ *     def __cinit__(self, adaptation=0.07):
  *         self.neuron = CHHNeuron(adaptation)             # <<<<<<<<<<<<<<
  *         # self.mats = mats
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(1, 136, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 136, __pyx_L1_error)
   try {
     __pyx_t_2 = HHNeuron(__pyx_t_1);
   } catch(...) {
@@ -4237,7 +4244,7 @@ static int __pyx_pf_6matsim_6matsim_8HHNeuron___cinit__(struct __pyx_obj_6matsim
   /* "matsim/matsim.pyx":135
  *     cdef CHHNeuron neuron
  * 
- *     def __cinit__(self, adaptation):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, adaptation=0.07):             # <<<<<<<<<<<<<<
  *         self.neuron = CHHNeuron(adaptation)
  *         # self.mats = mats
  */
@@ -8673,6 +8680,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  __pyx_float_0_07 = PyFloat_FromDouble(0.07); if (unlikely(!__pyx_float_0_07)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(1, 1, __pyx_L1_error)

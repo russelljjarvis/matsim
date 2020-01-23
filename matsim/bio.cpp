@@ -228,7 +228,7 @@ void Neuron::timestep(double dt) {
 
 HHNeuron::HHNeuron() {}
 
-HHNeuron::HHNeuron(bool adaptation) {
+HHNeuron::HHNeuron(double adaptation) {
 	double A = 1e-4;
 
 	this->g_l = 0.045 * 1000 * A;
@@ -238,7 +238,7 @@ HHNeuron::HHNeuron(bool adaptation) {
 	this->g_na = 50 * 1000. * A;
 	this->E_k = -90;
 	this->g_k = 5 * 1000 * A;
-	this->g_m = 0.07 * 1000 * A;
+	this->g_m = adaptation * 1000 * A;
 
 	this->V = E_l;
 	this->time = 0;
@@ -252,8 +252,6 @@ HHNeuron::HHNeuron(bool adaptation) {
 	this->i_k = 0;
 	this->i_l = 0;
 	this->i_m = 0;
-
-	this->adaptation = adaptation;
 }
 
 void HHNeuron::append_conductance(Conductance* conductance) {
@@ -314,12 +312,7 @@ void HHNeuron::integrate_voltage(double dt) {
 	this->i_l  = g_l * (V - E_l);
 	this->i_m  = g_m * p * (V - E_k);
 
-	if (this->adaptation) {
-		dVdt = (-this->i_l - this->i_na - this->i_k - this->i_m - i_syn) / c_m;
-	}
-	else {
-		dVdt = (-this->i_l - this->i_na - this->i_k - i_syn) / c_m;
-	}
+	dVdt = (-this->i_l - this->i_na - this->i_k - this->i_m - i_syn) / c_m;
 	
 	this->V += dVdt * dt;
 	this->m += dt * (am * (1 - m) - bm * m);

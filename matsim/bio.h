@@ -84,11 +84,10 @@ class Neuron {
 
 class HHNeuron {
 	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, g_m;
-	bool adaptation;
 
 	public:
 		HHNeuron();
-		HHNeuron(bool);
+		HHNeuron(double);
 		void append_conductance(Conductance*);
 		void integrate_voltage(double);
 		void timestep(double);
