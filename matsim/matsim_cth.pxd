@@ -9,10 +9,12 @@ cdef extern from "bio.h":
     cdef cppclass Conductance:
         void set_rate(double)
         double get_g()
+        void set_g(double)
 
     cdef cppclass ExponentialConductance(Conductance):
         ExponentialConductance(double, double, double) except +
         double get_g()
+        void set_g(double)
         double reversal
 
     cdef cppclass ShotNoiseConductance(Conductance):
@@ -20,6 +22,7 @@ cdef extern from "bio.h":
         ShotNoiseConductance(double, double, double, double) except +
         void set_rate(double)
         double get_g()
+        void set_g(double)
         double reversal
 
     cdef cppclass OUConductance(Conductance):
@@ -27,6 +30,7 @@ cdef extern from "bio.h":
         OUConductance(double, double, double, double) except +
         void set_rate(double)
         double get_g()
+        void set_g(double)
         double reversal
 
     cdef cppclass MATThresholds:
@@ -48,7 +52,7 @@ cdef extern from "bio.h":
 
     cdef cppclass HHNeuron:
         HHNeuron() except +
-        HHNeuron(double, double, double) except +
+        HHNeuron(double, double, double, double, double, double, double, double) except +
         void append_conductance(Conductance)
         void timestep(double)
         vector[Conductance*] conductances

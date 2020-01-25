@@ -10,6 +10,7 @@ class Conductance {
 		virtual void update(double);
 		virtual void set_rate(double);
 		virtual double get_g();
+		virtual void set_g(double);
 		virtual double get_reversal();
 };
 
@@ -21,6 +22,7 @@ class ExponentialConductance: public Conductance {
 		ExponentialConductance(double, double, double);
 		void update(double);
 		double get_g();
+		void set_g(double);
 		double get_reversal();
 		void activate();
 };
@@ -34,6 +36,7 @@ class ShotNoiseConductance: public Conductance {
 		void update(double);
 		void set_rate(double);
 		double get_g();
+		void set_g(double);
 		double get_reversal();
 		void activate();
 };
@@ -49,6 +52,7 @@ class OUConductance: public Conductance {
 		void update(double);
 		void set_rate(double);
 		double get_g();
+		void set_g(double);
 		double get_reversal();
 		void activate();
 };
@@ -87,7 +91,7 @@ class HHNeuron {
 
 	public:
 		HHNeuron();
-		HHNeuron(double, double, double);
+		HHNeuron(double, double, double, double, double, double, double, double);
 		void append_conductance(Conductance*);
 		void integrate_voltage(double);
 		void timestep(double);

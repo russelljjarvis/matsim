@@ -31,33 +31,66 @@ cdef class Conductance:
     def g(self):
         return deref(self.conductance).get_g()
 
+    def set_g(self, g):
+        deref(self.conductance).set_g(g)
+
 cdef class ExponentialConductance(Conductance):
+    cdef double g_peak, reversal, decay
+
     def __cinit__(self, double g_peak, double reversal, double decay):
+        self.g_peak = g_peak
+        self.reversal = reversal
+        self.decay = decay
         self.conductance = new CExponentialConductance(g_peak, reversal, decay)
 
     def __dealloc__(self):
         del self.conductance
 
+    def copy(self):
+        new_conductance = ExponentialConductance(self.g_peak, self.reversal, self.decay)
+        new_conductance.set_g(self.g)
+        return new_conductance
+
 cdef class ShotNoiseConductance(Conductance):
+    cdef double rate, g_peak, reversal, decay
     # cdef CShotNoiseConductance* conductance  # Hold a C++ instance which we're wrapping
 
     def __cinit__(self, double rate, double g_peak, double reversal, double decay):
+        self.rate = rate
+        self.g_peak = g_peak
+        self.reversal = reversal
+        self.decay = decay
         self.conductance = new CShotNoiseConductance(rate, g_peak, reversal, decay)
 
     def __dealloc__(self):
         del self.conductance
 
+    def copy(self):
+        new_conductance = ShotNoiseConductance(self.rate, self.g_peak, self.reversal, self.decay)
+        new_conductance.set_g(self.g)
+        return new_conductance
+
     # def set_rate(self, double rate):
     #     deref(self.conductance).set_rate(rate)
 
 cdef class OUConductance(Conductance):
+    cdef double rate, g_peak, reversal, decay
     # cdef COUConductance* conductance  # Hold a C++ instance which we're wrapping
 
     def __cinit__(self, double rate, double g_peak, double reversal, double decay):
+        self.rate = rate
+        self.g_peak = g_peak
+        self.reversal = reversal
+        self.decay = decay
         self.conductance = new COUConductance(rate, g_peak, reversal, decay)
 
     def __dealloc__(self):
         del self.conductance
+
+    def copy(self):
+        new_conductance = OUConductance(self.rate, self.g_peak, self.reversal, self.decay)
+        new_conductance.set_g(self.g)
+        return new_conductance
 
     # @property
     # def g(self):
@@ -131,16 +164,26 @@ cdef class Neuron:
 
 cdef class HHNeuron:
     cdef CHHNeuron neuron
+    cdef double adaptation, VS, Ah
+    conductances = []
 
-    def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128):
-        self.neuron = CHHNeuron(adaptation, VS, Ah)
+    def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):
+        self.adaptation = adaptation
+        self.VS = VS
+        self.Ah = Ah
+        self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)
         # self.mats = mats
 
     def append_conductance(self, Conductance cond):
+        self.conductances.append(cond)
         self.neuron.conductances.push_back(cond.conductance)
 
     cpdef void timestep(self, double dt):
         self.neuron.timestep(dt)
+
+    def copy(self):
+        new_neuron = HHNeuron(self.adaptation, self.VS, self.Ah, *self.gate_vars, self.voltage)
+        return new_neuron
 
     # Attribute access
     @property

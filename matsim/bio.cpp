@@ -41,11 +41,13 @@ double normal_rand() {
 void Conductance::update(double dt) { }
 void Conductance::set_rate(double rate) { }
 double Conductance::get_g() {return 0;}
+void Conductance::set_g(double g) { }
 double Conductance::get_reversal() {return 0;}
 void Conductance::activate() { }
 
 ExponentialConductance::ExponentialConductance() {}
 double ExponentialConductance::get_g() {return this->g;}
+void ExponentialConductance::set_g(double g) {this->g = g;}
 double ExponentialConductance::get_reversal() {return this->reversal;}
 
 ExponentialConductance::ExponentialConductance(double g_peak, double reversal, double decay) {
@@ -65,6 +67,7 @@ void ExponentialConductance::activate() {
 
 ShotNoiseConductance::ShotNoiseConductance() {}
 double ShotNoiseConductance::get_g() {return this->g;}
+void ShotNoiseConductance::set_g(double g) {this->g = g;}
 double ShotNoiseConductance::get_reversal() {return this->reversal;}
 void ShotNoiseConductance::activate() { }
 
@@ -91,6 +94,7 @@ void ShotNoiseConductance::set_rate(double rate) {
 
 OUConductance::OUConductance() {}
 double OUConductance::get_g() {return this->g;}
+void OUConductance::set_g(double g) {this->g = g;}
 double OUConductance::get_reversal() {return this->reversal;}
 void OUConductance::activate() { }
 
@@ -228,7 +232,8 @@ void Neuron::timestep(double dt) {
 
 HHNeuron::HHNeuron() {}
 
-HHNeuron::HHNeuron(double adaptation, double VS, double Ah) {
+HHNeuron::HHNeuron(double adaptation, double VS, double Ah,
+	double m = 0, double h = 0, double n = 0, double p = 0, double V = 200) {
 	double A = 1e-4;
 
 	this->g_l = 0.045 * 1000 * A;
@@ -243,13 +248,18 @@ HHNeuron::HHNeuron(double adaptation, double VS, double Ah) {
 	this->VS = VS;
 	this->Ah = Ah;
 
-	this->V = E_l;
+	if (V > 100) {
+		this->V = E_l;
+	}
+	else {
+		this->V = V;
+	}
 	this->time = 0;
 
-	this->m = 0;
-	this->h = 0;
-	this->n = 0;
-	this->p = 0;
+	this->m = m;
+	this->h = h;
+	this->n = n;
+	this->p = p;
 
 	this->i_na = 0;
 	this->i_k = 0;
