@@ -165,13 +165,14 @@ cdef class Neuron:
 cdef class HHNeuron:
     cdef CHHNeuron neuron
     cdef double adaptation, VS, Ah
-    conductances = []
+    cdef object conductances
 
     def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):
         self.adaptation = adaptation
         self.VS = VS
         self.Ah = Ah
         self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)
+        self.conductances = []
         # self.mats = mats
 
     def append_conductance(self, Conductance cond):
@@ -186,6 +187,10 @@ cdef class HHNeuron:
         return new_neuron
 
     # Attribute access
+    @property
+    def conductance(self):
+        return self.conductances
+
     @property
     def voltage(self):
         return self.neuron.V
