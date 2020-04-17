@@ -103,14 +103,30 @@ cdef class MATThresholds:
     cdef CMATThresholds* mat  # Hold a C++ instance which we're wrapping
     cdef string name
 
+    cdef double alpha1, alpha2, tau1, tau2, omega, refractory_period
+    cdef bool resetting
+
     def __cinit__(self, double alpha1, double alpha2, double tau1, double tau2, double omega,
             double refractory_period, name, resetting=False):
         self.mat = new CMATThresholds(alpha1, alpha2, tau1, tau2, omega,
             refractory_period, resetting)
         self.name = <string> name.encode('utf-8')
 
+        self.alpha1 = alpha1
+        self.alpha2 = alpha2
+        self.tau1   = tau1
+        self.tau2   = tau2
+        self.omega  = omega
+        self.refractory_period = refractory_period
+        self.resetting = resetting
+
     def __dealloc__(self):
         del self.mat
+
+    def copy(self):
+        new_mat = Neuron(self.alpha1, self.alpha2, self.tau1, self.tau2, self.omega,
+            self.refractory_period, self.name, self.resetting)
+        return new_mat
 
     @property
     def threshold(self):
@@ -129,6 +145,8 @@ cdef class MATThresholds:
 cdef class Neuron:
     cdef CNeuron neuron
     cdef vector[string] mat_names
+    cdef double resting_potential, membrane_resistance, membrane_capacitance
+    cdef object thresholds
 
     def __cinit__(self, double resting_potential, double membrane_resistance,
         double membrane_capacitance, mats):
@@ -136,7 +154,14 @@ cdef class Neuron:
         cdef MATThresholds mat
         cdef vector[CMATThresholds*] mat_vec
 
+        self.resting_potential = resting_potential
+        self.membrane_resistance = membrane_resistance
+        self.membrane_capacitance = membrane_capacitance
+        self.thresholds = []
+
         for mat in mats:
+            self.thresholds.append(mat)
+
             mat_vec.push_back(mat.mat)
             self.mat_names.push_back(mat.name)
 
@@ -148,6 +173,12 @@ cdef class Neuron:
 
     cpdef void timestep(self, double dt):
         self.neuron.timestep(dt)
+
+    def copy(self):
+        new_mats = [mat.copy() for mat in self.thresholds]
+        new_neuron = Neuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
+            )
+        return new_neuron
 
     # Attribute access
     @property
