@@ -124,7 +124,7 @@ cdef class MATThresholds:
         del self.mat
 
     def copy(self):
-        new_mat = Neuron(self.alpha1, self.alpha2, self.tau1, self.tau2, self.omega,
+        new_mat = MATThresholds(self.alpha1, self.alpha2, self.tau1, self.tau2, self.omega,
             self.refractory_period, self.name, self.resetting)
         return new_mat
 
@@ -177,7 +177,7 @@ cdef class Neuron:
     def copy(self):
         new_mats = [mat.copy() for mat in self.thresholds]
         new_neuron = Neuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
-            )
+            self.thresholds)
         return new_neuron
 
     # Attribute access
