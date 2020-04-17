@@ -105,12 +105,14 @@ cdef class MATThresholds:
 
     cdef double alpha1, alpha2, tau1, tau2, omega, refractory_period
     cdef bool resetting
+    cdef object name_py
 
     def __cinit__(self, double alpha1, double alpha2, double tau1, double tau2, double omega,
             double refractory_period, name, resetting=False):
         self.mat = new CMATThresholds(alpha1, alpha2, tau1, tau2, omega,
             refractory_period, resetting)
         self.name = <string> name.encode('utf-8')
+        self.name_py = name
 
         self.alpha1 = alpha1
         self.alpha2 = alpha2
@@ -125,7 +127,7 @@ cdef class MATThresholds:
 
     def copy(self):
         new_mat = MATThresholds(self.alpha1, self.alpha2, self.tau1, self.tau2, self.omega,
-            self.refractory_period, self.name, self.resetting)
+            self.refractory_period, self.name_py, self.resetting)
         return new_mat
 
     @property
