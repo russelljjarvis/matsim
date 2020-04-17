@@ -45,7 +45,10 @@ cdef class ExponentialConductance(Conductance):
 
     def __dealloc__(self):
         del self.conductance
-
+    
+    def get_params(self):
+        return self.g_peak, self.reversal, self.decay
+    
     def copy(self):
         new_conductance = ExponentialConductance(self.g_peak, self.reversal, self.decay)
         new_conductance.set_g(self.g)
