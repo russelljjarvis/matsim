@@ -26,6 +26,9 @@ cdef class Conductance:
 
     def set_rate(self, double rate):
         deref(self.conductance).set_rate(rate)
+    
+    def update(self, dt):
+        deref(self.conductance).update(dt)
 
     @property
     def g(self):
@@ -50,9 +53,13 @@ cdef class ExponentialConductance(Conductance):
         return self.g_peak, self.reversal, self.decay
     
     def copy(self):
-        new_conductance = ExponentialConductance(self.g_peak, self.reversal, self.decay)
+#         new_conductance = ExponentialConductance(self.g_peak, selßf.reversal, self.decay)
+        new_conductance = ExponentialConductance(0.005, -100, 100)
         new_conductance.set_g(self.g)
         return new_conductance
+    
+    def create_conductance(self):
+        return self.__cinit__(0.005, -100, 100)
 
 cdef class ShotNoiseConductance(Conductance):
     cdef double rate, g_peak, reversal, decay
