@@ -47,7 +47,7 @@ cdef extern from "bio.h":
 
     cdef cppclass Neuron:
         Neuron() except +
-        Neuron(double, double, double, vector[MATThresholds*]) except +
+        Neuron(double, double, double, vector[MATThresholds*], double) except +
         void append_conductance(Conductance)
         void timestep(double)
         vector[Conductance*] conductances

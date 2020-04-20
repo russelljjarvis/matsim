@@ -157,11 +157,11 @@ cdef class MATThresholds:
 cdef class Neuron:
     cdef CNeuron neuron
     cdef vector[string] mat_names
-    cdef double resting_potential, membrane_resistance, membrane_capacitance
+    cdef double resting_potential, membrane_resistance, membrane_capacitance, reset_potential
     cdef object thresholds
 
     def __cinit__(self, double resting_potential, double membrane_resistance,
-        double membrane_capacitance, mats):
+        double membrane_capacitance, mats, reset_potential=None):
         # cdef MATThresholds* c_mat
         cdef MATThresholds mat
         cdef vector[CMATThresholds*] mat_vec
@@ -170,6 +170,11 @@ cdef class Neuron:
         self.membrane_resistance = membrane_resistance
         self.membrane_capacitance = membrane_capacitance
         self.thresholds = []
+        
+        if reset_potential is None:
+            reset_potential = resting_potential
+        
+        self.reset_potential = reset_potential
 
         for mat in mats:
             self.thresholds.append(mat)
@@ -177,7 +182,7 @@ cdef class Neuron:
             mat_vec.push_back(mat.mat)
             self.mat_names.push_back(mat.name)
 
-        self.neuron = CNeuron(resting_potential, membrane_resistance, membrane_capacitance, mat_vec)
+        self.neuron = CNeuron(resting_potential, membrane_resistance, membrane_capacitance, mat_vec, reset_potential)
         # self.mats = mats
 
     def append_conductance(self, Conductance cond):
@@ -189,7 +194,7 @@ cdef class Neuron:
     def copy(self):
         new_mats = [mat.copy() for mat in self.thresholds]
         new_neuron = Neuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
-            self.thresholds)
+            self.thresholds, self.reset_potential)
         return new_neuron
 
     # Attribute access

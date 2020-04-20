@@ -174,11 +174,13 @@ void MATThresholds::reset_spike_times() {
 
 Neuron::Neuron() {}
 
-Neuron::Neuron(double resting_potential, double membrane_resistance, double membrane_capacitance, vector<MATThresholds*> mats) {
+Neuron::Neuron(double resting_potential, double membrane_resistance, double membrane_capacitance, vector<MATThresholds*> mats,
+               double reset_potential) {
 	this->resting_potential = resting_potential;
 	this->membrane_resistance = membrane_resistance;
 	this->membrane_capacitance = membrane_capacitance;
 	this->mats = mats;
+    this->reset_potential = reset_potential;
 
 	voltage = resting_potential;
 	time_constant = membrane_capacitance * membrane_resistance;
@@ -220,7 +222,7 @@ void Neuron::timestep(double dt) {
 			mat->fire(time);
 			
 			if (mat->resetting == true) {
-				this->voltage = this->resting_potential;
+				this->voltage = this->reset_potential;
 			}
 
 			for (auto c : conductances) {
