@@ -250,25 +250,37 @@ MCNeuron::MCNeuron(double resting_potential, double membrane_resistance, double 
 	time = 0;
 }
 
-void MCNeuron::append_conductance(Conductance* conductance) {
-	conductances.push_back(conductance);
+void MCNeuron::append_conductance(Conductance* conductance, int compartment) {
+	if (compartment == 0) {
+		conductances_soma.push_back(conductance);
+	}
+	else {
+		conductances_dendrite.push_back(conductance);
+	}
 }
 
 void MCNeuron::integrate_voltage(double dt) {
-	double tot_conductance = 0;
-	double tot_gr = 0;
+	double tot_conductance_soma = 0;
+	double tot_gr_soma = 0;
+	double tot_conductance_dendrite = 0;
+	double tot_gr_dendrite = 0;
 	double factor, v_barS, v_barD, tauS, tauD;
 
-	v_barS = (leaky_conductance * resting_potential + coupling_conductance * voltageDendrite) / (leaky_conductance + coupling_conductance);
-	tauS = membrane_capacitance / (leaky_conductance + coupling_conductance);
-
-	for (auto c : conductances) {
-		tot_conductance += c->get_g();
-		tot_gr += c->get_g() * c->get_reversal();
+	for (auto c : conductances_soma) {
+		tot_conductance_soma += c->get_g();
+		tot_gr_soma += c->get_g() * c->get_reversal();
 	}
 
-	v_barD = (leaky_conductance * resting_potential + coupling_conductance * voltageSoma + tot_gr) / (leaky_conductance + coupling_conductance + tot_conductance);
-	tauD = membrane_capacitance / (leaky_conductance + coupling_conductance + tot_conductance);
+	v_barS = (leaky_conductance * resting_potential + coupling_conductance * voltageDendrite + tot_gr_soma) / (leaky_conductance + coupling_conductance + tot_conductance_soma);
+	tauS = membrane_capacitance / (leaky_conductance + coupling_conductance + tot_conductance_soma);
+
+	for (auto c : conductances_dendrite) {
+		tot_conductance_dendrite += c->get_g();
+		tot_gr_dendrite += c->get_g() * c->get_reversal();
+	}
+
+	v_barD = (leaky_conductance * resting_potential + coupling_conductance * voltageSoma + tot_gr_dendrite) / (leaky_conductance + coupling_conductance + tot_gr_dendrite);
+	tauD = membrane_capacitance / (leaky_conductance + coupling_conductance + tot_conductance_dendrite);
 
 	voltageSoma = v_barS + (voltageSoma - v_barS) * exp(-dt / tauS);
 	voltageDendrite = v_barD + (voltageDendrite - v_barD) * exp(-dt / tauD);
@@ -277,7 +289,11 @@ void MCNeuron::integrate_voltage(double dt) {
 void MCNeuron::timestep(double dt) {
 	time += dt;
 
-	for (auto c : conductances) {
+	for (auto c : conductances_soma) {
+		c->update(dt);
+	}
+
+	for (auto c : conductances_dendrite) {
 		c->update(dt);
 	}
 
@@ -292,7 +308,10 @@ void MCNeuron::timestep(double dt) {
 				this->voltageSoma = this->reset_potential;
 			}
 
-			for (auto c : conductances) {
+			for (auto c : conductances_soma) {
+				c->activate();
+			}
+			for (auto c : conductances_dendrite) {
 				c->activate();
 			}
 		}

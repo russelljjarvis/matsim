@@ -57,9 +57,9 @@ cdef extern from "bio.h":
     cdef cppclass MCNeuron:
         MCNeuron() except +
         MCNeuron(double, double, double, vector[MATThresholds*], double, double) except +
-        void append_conductance(Conductance)
+        void append_conductance(Conductance, int)
         void timestep(double)
-        vector[Conductance*] conductances
+        vector[Conductance*] conductances_soma, conductances_dendrite
         vector[MATThresholds*] mats
         double voltageSoma, voltageDendrite, time
 

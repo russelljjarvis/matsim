@@ -243,8 +243,13 @@ cdef class MCNeuron:
         self.neuron = CMCNeuron(resting_potential, membrane_resistance, membrane_capacitance, mat_vec, reset_potential, coupling_conductance)
         # self.mats = mats
 
-    def append_conductance(self, Conductance cond):
-        self.neuron.conductances.push_back(cond.conductance)
+    def append_conductance(self, Conductance cond, compartment):
+        if compartment == 'soma':
+            self.neuron.conductances_soma.push_back(cond.conductance)
+        elif compartment == 'dendrite':
+            self.neuron.conductances_dendrite.push_back(cond.conductance)
+        else:
+            print('unrecognised compartment')
 
     cpdef void timestep(self, double dt):
         self.neuron.timestep(dt)

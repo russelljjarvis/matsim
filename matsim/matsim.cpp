@@ -962,7 +962,7 @@ struct __pyx_obj_6matsim_6matsim_MCNeuron {
 };
 
 
-/* "matsim/matsim.pyx":271
+/* "matsim/matsim.pyx":276
  * 
  * 
  * cdef class HHNeuron:             # <<<<<<<<<<<<<<
@@ -1009,7 +1009,7 @@ struct __pyx_vtabstruct_6matsim_6matsim_MCNeuron {
 static struct __pyx_vtabstruct_6matsim_6matsim_MCNeuron *__pyx_vtabptr_6matsim_6matsim_MCNeuron;
 
 
-/* "matsim/matsim.pyx":271
+/* "matsim/matsim.pyx":276
  * 
  * 
  * cdef class HHNeuron:             # <<<<<<<<<<<<<<
@@ -1306,6 +1306,15 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
 
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* BytesEquals.proto */
+static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
+
+/* UnicodeEquals.proto */
+static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
+
 /* RaiseTooManyValuesToUnpack.proto */
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
 
@@ -1579,6 +1588,7 @@ int __pyx_module_is_main_matsim__matsim = 0;
 
 /* Implementation of 'matsim.matsim' */
 static PyObject *__pyx_builtin_TypeError;
+static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_max;
 static PyObject *__pyx_builtin_enumerate;
 static const char __pyx_k_T[] = "T";
@@ -1604,12 +1614,14 @@ static const char __pyx_k_inh[] = "inh";
 static const char __pyx_k_mat[] = "mat";
 static const char __pyx_k_max[] = "max";
 static const char __pyx_k_sum[] = "sum";
+static const char __pyx_k_cond[] = "cond";
 static const char __pyx_k_copy[] = "copy";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mats[] = "mats";
 static const char __pyx_k_name[] = "name";
 static const char __pyx_k_rate[] = "rate";
 static const char __pyx_k_seed[] = "seed";
+static const char __pyx_k_soma[] = "soma";
 static const char __pyx_k_tau1[] = "tau1";
 static const char __pyx_k_tau2[] = "tau2";
 static const char __pyx_k_test[] = "__test__";
@@ -1623,6 +1635,7 @@ static const char __pyx_k_index[] = "index";
 static const char __pyx_k_level[] = "level";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_omega[] = "omega";
+static const char __pyx_k_print[] = "print";
 static const char __pyx_k_set_g[] = "set_g";
 static const char __pyx_k_stack[] = "stack";
 static const char __pyx_k_utf_8[] = "utf-8";
@@ -1645,6 +1658,7 @@ static const char __pyx_k_voltage[] = "voltage";
 static const char __pyx_k_HHNeuron[] = "HHNeuron";
 static const char __pyx_k_MCNeuron[] = "MCNeuron";
 static const char __pyx_k_c_neuron[] = "c_neuron";
+static const char __pyx_k_dendrite[] = "dendrite";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_reversal[] = "reversal";
 static const char __pyx_k_setstate[] = "__setstate__";
@@ -1662,6 +1676,7 @@ static const char __pyx_k_adaptation[] = "adaptation";
 static const char __pyx_k_matsim_pyx[] = "matsim.pyx";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_Conductance[] = "Conductance";
+static const char __pyx_k_compartment[] = "compartment";
 static const char __pyx_k_conductance[] = "conductance";
 static const char __pyx_k_intensities[] = "intensities";
 static const char __pyx_k_result_dict[] = "result_dict";
@@ -1690,6 +1705,7 @@ static const char __pyx_k_ShotNoiseConductance[] = "ShotNoiseConductance";
 static const char __pyx_k_coupling_conductance[] = "coupling_conductance";
 static const char __pyx_k_membrane_capacitance[] = "membrane_capacitance";
 static const char __pyx_k_ExponentialConductance[] = "ExponentialConductance";
+static const char __pyx_k_unrecognised_compartment[] = "unrecognised compartment";
 static const char __pyx_k_sr_experiment_locals_lambda[] = "sr_experiment.<locals>.<lambda>";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_self_conductance_cannot_be_conve[] = "self.conductance cannot be converted to a Python object for pickling";
@@ -1719,10 +1735,13 @@ static PyObject *__pyx_n_s_c_neuron;
 static PyObject *__pyx_n_s_cinit;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_columns;
+static PyObject *__pyx_n_s_compartment;
+static PyObject *__pyx_n_s_cond;
 static PyObject *__pyx_n_s_conductance;
 static PyObject *__pyx_n_s_copy;
 static PyObject *__pyx_n_s_coupling_conductance;
 static PyObject *__pyx_n_s_decay;
+static PyObject *__pyx_n_u_dendrite;
 static PyObject *__pyx_n_s_dt;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_enumerate;
@@ -1763,6 +1782,7 @@ static PyObject *__pyx_n_s_omega;
 static PyObject *__pyx_n_s_p;
 static PyObject *__pyx_n_s_pandas;
 static PyObject *__pyx_n_s_pd;
+static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_rate;
 static PyObject *__pyx_n_s_reduce;
@@ -1783,6 +1803,7 @@ static PyObject *__pyx_kp_s_self_conductance_cannot_be_conve;
 static PyObject *__pyx_n_s_set_g;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
+static PyObject *__pyx_n_u_soma;
 static PyObject *__pyx_n_s_spike_times;
 static PyObject *__pyx_n_s_spike_trains;
 static PyObject *__pyx_n_s_sr_experiment;
@@ -1802,6 +1823,7 @@ static PyObject *__pyx_n_s_time_windows;
 static PyObject *__pyx_n_s_timestep;
 static PyObject *__pyx_n_s_tot_time;
 static PyObject *__pyx_n_s_tw;
+static PyObject *__pyx_kp_u_unrecognised_compartment;
 static PyObject *__pyx_kp_u_utf_8;
 static PyObject *__pyx_n_s_voltage;
 static PyObject *__pyx_n_s_x;
@@ -1846,7 +1868,7 @@ static int __pyx_pf_6matsim_6matsim_6Neuron_4time_2__set__(struct __pyx_obj_6mat
 static PyObject *__pyx_pf_6matsim_6matsim_6Neuron_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6matsim_6matsim_Neuron *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_6Neuron_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6matsim_6matsim_Neuron *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_6matsim_6matsim_8MCNeuron___cinit__(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, double __pyx_v_resting_potential, double __pyx_v_membrane_resistance, double __pyx_v_membrane_capacitance, PyObject *__pyx_v_mats, PyObject *__pyx_v_reset_potential, PyObject *__pyx_v_coupling_conductance); /* proto */
-static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, struct __pyx_obj_6matsim_6matsim_Conductance *__pyx_v_cond); /* proto */
+static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, struct __pyx_obj_6matsim_6matsim_Conductance *__pyx_v_cond, PyObject *__pyx_v_compartment); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4timestep(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, double __pyx_v_dt); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_7voltage___get__(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self); /* proto */
@@ -1910,11 +1932,12 @@ static PyObject *__pyx_tuple__15;
 static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
-static PyObject *__pyx_tuple__20;
-static PyObject *__pyx_tuple__22;
-static PyObject *__pyx_codeobj__19;
-static PyObject *__pyx_codeobj__21;
-static PyObject *__pyx_codeobj__23;
+static PyObject *__pyx_tuple__19;
+static PyObject *__pyx_tuple__21;
+static PyObject *__pyx_tuple__23;
+static PyObject *__pyx_codeobj__20;
+static PyObject *__pyx_codeobj__22;
+static PyObject *__pyx_codeobj__24;
 /* Late includes */
 
 /* "matsim/matsim.pyx":28
@@ -5988,19 +6011,67 @@ static int __pyx_pf_6matsim_6matsim_8MCNeuron___cinit__(struct __pyx_obj_6matsim
 /* "matsim/matsim.pyx":246
  *         # self.mats = mats
  * 
- *     def append_conductance(self, Conductance cond):             # <<<<<<<<<<<<<<
- *         self.neuron.conductances.push_back(cond.conductance)
- * 
+ *     def append_conductance(self, Conductance cond, compartment):             # <<<<<<<<<<<<<<
+ *         if compartment == 'soma':
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance(PyObject *__pyx_v_self, PyObject *__pyx_v_cond); /*proto*/
-static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance(PyObject *__pyx_v_self, PyObject *__pyx_v_cond) {
+static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  struct __pyx_obj_6matsim_6matsim_Conductance *__pyx_v_cond = 0;
+  PyObject *__pyx_v_compartment = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("append_conductance (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_cond,&__pyx_n_s_compartment,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_cond)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_compartment)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("append_conductance", 1, 2, 2, 1); __PYX_ERR(1, 246, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "append_conductance") < 0)) __PYX_ERR(1, 246, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_cond = ((struct __pyx_obj_6matsim_6matsim_Conductance *)values[0]);
+    __pyx_v_compartment = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("append_conductance", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 246, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("matsim.matsim.MCNeuron.append_conductance", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cond), __pyx_ptype_6matsim_6matsim_Conductance, 1, "cond", 0))) __PYX_ERR(1, 246, __pyx_L1_error)
-  __pyx_r = __pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(((struct __pyx_obj_6matsim_6matsim_MCNeuron *)__pyx_v_self), ((struct __pyx_obj_6matsim_6matsim_Conductance *)__pyx_v_cond));
+  __pyx_r = __pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(((struct __pyx_obj_6matsim_6matsim_MCNeuron *)__pyx_v_self), __pyx_v_cond, __pyx_v_compartment);
 
   /* function exit code */
   goto __pyx_L0;
@@ -6011,37 +6082,108 @@ static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance(PyObject
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, struct __pyx_obj_6matsim_6matsim_Conductance *__pyx_v_cond) {
+static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_self, struct __pyx_obj_6matsim_6matsim_Conductance *__pyx_v_cond, PyObject *__pyx_v_compartment) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("append_conductance", 0);
 
   /* "matsim/matsim.pyx":247
  * 
- *     def append_conductance(self, Conductance cond):
- *         self.neuron.conductances.push_back(cond.conductance)             # <<<<<<<<<<<<<<
+ *     def append_conductance(self, Conductance cond, compartment):
+ *         if compartment == 'soma':             # <<<<<<<<<<<<<<
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
+ *         elif compartment == 'dendrite':
+ */
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_compartment, __pyx_n_u_soma, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(1, 247, __pyx_L1_error)
+  if (__pyx_t_1) {
+
+    /* "matsim/matsim.pyx":248
+ *     def append_conductance(self, Conductance cond, compartment):
+ *         if compartment == 'soma':
+ *             self.neuron.conductances_soma.push_back(cond.conductance)             # <<<<<<<<<<<<<<
+ *         elif compartment == 'dendrite':
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)
+ */
+    try {
+      __pyx_v_self->neuron.conductances_soma.push_back(__pyx_v_cond->conductance);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(1, 248, __pyx_L1_error)
+    }
+
+    /* "matsim/matsim.pyx":247
+ * 
+ *     def append_conductance(self, Conductance cond, compartment):
+ *         if compartment == 'soma':             # <<<<<<<<<<<<<<
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
+ *         elif compartment == 'dendrite':
+ */
+    goto __pyx_L3;
+  }
+
+  /* "matsim/matsim.pyx":249
+ *         if compartment == 'soma':
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
+ *         elif compartment == 'dendrite':             # <<<<<<<<<<<<<<
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)
+ *         else:
+ */
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_compartment, __pyx_n_u_dendrite, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(1, 249, __pyx_L1_error)
+  if (__pyx_t_1) {
+
+    /* "matsim/matsim.pyx":250
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
+ *         elif compartment == 'dendrite':
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)             # <<<<<<<<<<<<<<
+ *         else:
+ *             print('unrecognised compartment')
+ */
+    try {
+      __pyx_v_self->neuron.conductances_dendrite.push_back(__pyx_v_cond->conductance);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(1, 250, __pyx_L1_error)
+    }
+
+    /* "matsim/matsim.pyx":249
+ *         if compartment == 'soma':
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
+ *         elif compartment == 'dendrite':             # <<<<<<<<<<<<<<
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)
+ *         else:
+ */
+    goto __pyx_L3;
+  }
+
+  /* "matsim/matsim.pyx":252
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)
+ *         else:
+ *             print('unrecognised compartment')             # <<<<<<<<<<<<<<
  * 
  *     cpdef void timestep(self, double dt):
  */
-  try {
-    __pyx_v_self->neuron.conductances.push_back(__pyx_v_cond->conductance);
-  } catch(...) {
-    __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 247, __pyx_L1_error)
+  /*else*/ {
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 252, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
+  __pyx_L3:;
 
   /* "matsim/matsim.pyx":246
  *         # self.mats = mats
  * 
- *     def append_conductance(self, Conductance cond):             # <<<<<<<<<<<<<<
- *         self.neuron.conductances.push_back(cond.conductance)
- * 
+ *     def append_conductance(self, Conductance cond, compartment):             # <<<<<<<<<<<<<<
+ *         if compartment == 'soma':
+ *             self.neuron.conductances_soma.push_back(cond.conductance)
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("matsim.matsim.MCNeuron.append_conductance", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -6050,8 +6192,8 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_2append_conductance(struct _
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":249
- *         self.neuron.conductances.push_back(cond.conductance)
+/* "matsim/matsim.pyx":254
+ *             print('unrecognised compartment')
  * 
  *     cpdef void timestep(self, double dt):             # <<<<<<<<<<<<<<
  *         self.neuron.timestep(dt)
@@ -6076,10 +6218,10 @@ static void __pyx_f_6matsim_6matsim_8MCNeuron_timestep(struct __pyx_obj_6matsim_
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_timestep); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 249, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_timestep); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 254, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_6matsim_6matsim_8MCNeuron_5timestep)) {
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 249, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 254, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -6095,7 +6237,7 @@ static void __pyx_f_6matsim_6matsim_8MCNeuron_timestep(struct __pyx_obj_6matsim_
         __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 249, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 254, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -6115,7 +6257,7 @@ static void __pyx_f_6matsim_6matsim_8MCNeuron_timestep(struct __pyx_obj_6matsim_
     #endif
   }
 
-  /* "matsim/matsim.pyx":250
+  /* "matsim/matsim.pyx":255
  * 
  *     cpdef void timestep(self, double dt):
  *         self.neuron.timestep(dt)             # <<<<<<<<<<<<<<
@@ -6124,8 +6266,8 @@ static void __pyx_f_6matsim_6matsim_8MCNeuron_timestep(struct __pyx_obj_6matsim_
  */
   __pyx_v_self->neuron.timestep(__pyx_v_dt);
 
-  /* "matsim/matsim.pyx":249
- *         self.neuron.conductances.push_back(cond.conductance)
+  /* "matsim/matsim.pyx":254
+ *             print('unrecognised compartment')
  * 
  *     cpdef void timestep(self, double dt):             # <<<<<<<<<<<<<<
  *         self.neuron.timestep(dt)
@@ -6153,7 +6295,7 @@ static PyObject *__pyx_pw_6matsim_6matsim_8MCNeuron_5timestep(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("timestep (wrapper)", 0);
   assert(__pyx_arg_dt); {
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(__pyx_arg_dt); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 249, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(__pyx_arg_dt); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 254, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6174,7 +6316,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4timestep(struct __pyx_obj_6
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("timestep", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_6matsim_6matsim_8MCNeuron_timestep(__pyx_v_self, __pyx_v_dt, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 249, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_6matsim_6matsim_8MCNeuron_timestep(__pyx_v_self, __pyx_v_dt, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6191,7 +6333,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4timestep(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":252
+/* "matsim/matsim.pyx":257
  *         self.neuron.timestep(dt)
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -6228,7 +6370,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("copy", 0);
 
-  /* "matsim/matsim.pyx":253
+  /* "matsim/matsim.pyx":258
  * 
  *     def copy(self):
  *         new_mats = [mat.copy() for mat in self.thresholds]             # <<<<<<<<<<<<<<
@@ -6236,32 +6378,32 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
  *             self.thresholds, self.reset_potential, self.coupling_conductance)
  */
   { /* enter inner scope */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 253, __pyx_L5_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 258, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_v_self->thresholds)) || PyTuple_CheckExact(__pyx_v_self->thresholds)) {
       __pyx_t_2 = __pyx_v_self->thresholds; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
       __pyx_t_4 = NULL;
     } else {
-      __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_self->thresholds); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 253, __pyx_L5_error)
+      __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_self->thresholds); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 258, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 253, __pyx_L5_error)
+      __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 258, __pyx_L5_error)
     }
     for (;;) {
       if (likely(!__pyx_t_4)) {
         if (likely(PyList_CheckExact(__pyx_t_2))) {
           if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(1, 253, __pyx_L5_error)
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(1, 258, __pyx_L5_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 253, __pyx_L5_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 258, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(1, 253, __pyx_L5_error)
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(1, 258, __pyx_L5_error)
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 253, __pyx_L5_error)
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 258, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -6271,7 +6413,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(1, 253, __pyx_L5_error)
+            else __PYX_ERR(1, 258, __pyx_L5_error)
           }
           break;
         }
@@ -6279,7 +6421,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr2__pyx_v_mat, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr2__pyx_v_mat, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 253, __pyx_L5_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_8genexpr2__pyx_v_mat, __pyx_n_s_copy); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 258, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_7 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -6293,10 +6435,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
       }
       __pyx_t_5 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 253, __pyx_L5_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 258, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(1, 253, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(1, 258, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -6310,40 +6452,40 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
   __pyx_v_new_mats = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":254
+  /* "matsim/matsim.pyx":259
  *     def copy(self):
  *         new_mats = [mat.copy() for mat in self.thresholds]
  *         new_neuron = MCNeuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,             # <<<<<<<<<<<<<<
  *             self.thresholds, self.reset_potential, self.coupling_conductance)
  *         return new_neuron
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->resting_potential); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 254, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->resting_potential); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->membrane_resistance); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 254, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->membrane_resistance); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->membrane_capacitance); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 254, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->membrane_capacitance); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "matsim/matsim.pyx":255
+  /* "matsim/matsim.pyx":260
  *         new_mats = [mat.copy() for mat in self.thresholds]
  *         new_neuron = MCNeuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
  *             self.thresholds, self.reset_potential, self.coupling_conductance)             # <<<<<<<<<<<<<<
  *         return new_neuron
  * 
  */
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_self->reset_potential); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 255, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_self->reset_potential); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_self->coupling_conductance); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 255, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_self->coupling_conductance); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 260, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "matsim/matsim.pyx":254
+  /* "matsim/matsim.pyx":259
  *     def copy(self):
  *         new_mats = [mat.copy() for mat in self.thresholds]
  *         new_neuron = MCNeuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,             # <<<<<<<<<<<<<<
  *             self.thresholds, self.reset_potential, self.coupling_conductance)
  *         return new_neuron
  */
-  __pyx_t_8 = PyTuple_New(6); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 254, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(6); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1);
@@ -6363,13 +6505,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
   __pyx_t_5 = 0;
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6matsim_6matsim_MCNeuron), __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 254, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6matsim_6matsim_MCNeuron), __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_new_neuron = ((struct __pyx_obj_6matsim_6matsim_MCNeuron *)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "matsim/matsim.pyx":256
+  /* "matsim/matsim.pyx":261
  *         new_neuron = MCNeuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
  *             self.thresholds, self.reset_potential, self.coupling_conductance)
  *         return new_neuron             # <<<<<<<<<<<<<<
@@ -6381,7 +6523,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
   __pyx_r = ((PyObject *)__pyx_v_new_neuron);
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":252
+  /* "matsim/matsim.pyx":257
  *         self.neuron.timestep(dt)
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -6408,7 +6550,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_6copy(struct __pyx_obj_6mats
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":260
+/* "matsim/matsim.pyx":265
  *     # Attribute access
  *     @property
  *     def voltage(self):             # <<<<<<<<<<<<<<
@@ -6439,7 +6581,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_7voltage___get__(struct __py
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":261
+  /* "matsim/matsim.pyx":266
  *     @property
  *     def voltage(self):
  *         return np.array([self.neuron.voltageSoma, self.neuron.voltageDendrite])             # <<<<<<<<<<<<<<
@@ -6447,16 +6589,16 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_7voltage___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->neuron.voltageSoma); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->neuron.voltageSoma); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->neuron.voltageDendrite); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->neuron.voltageDendrite); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
   PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
@@ -6477,14 +6619,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_7voltage___get__(struct __py
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 261, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":260
+  /* "matsim/matsim.pyx":265
  *     # Attribute access
  *     @property
  *     def voltage(self):             # <<<<<<<<<<<<<<
@@ -6507,7 +6649,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_7voltage___get__(struct __py
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":264
+/* "matsim/matsim.pyx":269
  * 
  *     @property
  *     def time(self):             # <<<<<<<<<<<<<<
@@ -6534,7 +6676,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4time___get__(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":265
+  /* "matsim/matsim.pyx":270
  *     @property
  *     def time(self):
  *         return self.neuron.time             # <<<<<<<<<<<<<<
@@ -6542,13 +6684,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4time___get__(struct __pyx_o
  *     def time(self, time):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.time); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 265, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.time); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":264
+  /* "matsim/matsim.pyx":269
  * 
  *     @property
  *     def time(self):             # <<<<<<<<<<<<<<
@@ -6567,7 +6709,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_4time___get__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":267
+/* "matsim/matsim.pyx":272
  *         return self.neuron.time
  *     @time.setter
  *     def time(self, time):             # <<<<<<<<<<<<<<
@@ -6594,17 +6736,17 @@ static int __pyx_pf_6matsim_6matsim_8MCNeuron_4time_2__set__(struct __pyx_obj_6m
   double __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "matsim/matsim.pyx":268
+  /* "matsim/matsim.pyx":273
  *     @time.setter
  *     def time(self, time):
  *         self.neuron.time = time             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_time); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 268, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_time); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 273, __pyx_L1_error)
   __pyx_v_self->neuron.time = __pyx_t_1;
 
-  /* "matsim/matsim.pyx":267
+  /* "matsim/matsim.pyx":272
  *         return self.neuron.time
  *     @time.setter
  *     def time(self, time):             # <<<<<<<<<<<<<<
@@ -6654,7 +6796,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_8__reduce_cython__(CYTHON_UN
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6707,7 +6849,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_10__setstate_cython__(CYTHON
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6730,7 +6872,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8MCNeuron_10__setstate_cython__(CYTHON
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":276
+/* "matsim/matsim.pyx":281
  *     cdef object conductances
  * 
  *     def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):             # <<<<<<<<<<<<<<
@@ -6837,7 +6979,7 @@ static int __pyx_pw_6matsim_6matsim_8HHNeuron_1__cinit__(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 276, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 281, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6872,7 +7014,7 @@ static int __pyx_pw_6matsim_6matsim_8HHNeuron_1__cinit__(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 276, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 281, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("matsim.matsim.HHNeuron.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6900,67 +7042,67 @@ static int __pyx_pf_6matsim_6matsim_8HHNeuron___cinit__(struct __pyx_obj_6matsim
   PyObject *__pyx_t_10 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "matsim/matsim.pyx":277
+  /* "matsim/matsim.pyx":282
  * 
  *     def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):
  *         self.adaptation = adaptation             # <<<<<<<<<<<<<<
  *         self.VS = VS
  *         self.Ah = Ah
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 277, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 282, __pyx_L1_error)
   __pyx_v_self->adaptation = __pyx_t_1;
 
-  /* "matsim/matsim.pyx":278
+  /* "matsim/matsim.pyx":283
  *     def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):
  *         self.adaptation = adaptation
  *         self.VS = VS             # <<<<<<<<<<<<<<
  *         self.Ah = Ah
  *         self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_VS); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 278, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_VS); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 283, __pyx_L1_error)
   __pyx_v_self->VS = __pyx_t_1;
 
-  /* "matsim/matsim.pyx":279
+  /* "matsim/matsim.pyx":284
  *         self.adaptation = adaptation
  *         self.VS = VS
  *         self.Ah = Ah             # <<<<<<<<<<<<<<
  *         self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)
  *         self.conductances = []
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_Ah); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 279, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_Ah); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 284, __pyx_L1_error)
   __pyx_v_self->Ah = __pyx_t_1;
 
-  /* "matsim/matsim.pyx":280
+  /* "matsim/matsim.pyx":285
  *         self.VS = VS
  *         self.Ah = Ah
  *         self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)             # <<<<<<<<<<<<<<
  *         self.conductances = []
  *         # self.mats = mats
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_VS); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_v_Ah); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_v_m); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_v_h); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_p); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_V); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 280, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_adaptation); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_VS); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_v_Ah); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_v_m); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_v_h); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_p); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_V); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 285, __pyx_L1_error)
   try {
     __pyx_t_9 = HHNeuron(__pyx_t_1, __pyx_t_2, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 280, __pyx_L1_error)
+    __PYX_ERR(1, 285, __pyx_L1_error)
   }
   __pyx_v_self->neuron = __pyx_t_9;
 
-  /* "matsim/matsim.pyx":281
+  /* "matsim/matsim.pyx":286
  *         self.Ah = Ah
  *         self.neuron = CHHNeuron(adaptation, VS, Ah, m, h, n, p, V)
  *         self.conductances = []             # <<<<<<<<<<<<<<
  *         # self.mats = mats
  * 
  */
-  __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 281, __pyx_L1_error)
+  __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 286, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_10);
   __Pyx_GOTREF(__pyx_v_self->conductances);
@@ -6968,7 +7110,7 @@ static int __pyx_pf_6matsim_6matsim_8HHNeuron___cinit__(struct __pyx_obj_6matsim
   __pyx_v_self->conductances = __pyx_t_10;
   __pyx_t_10 = 0;
 
-  /* "matsim/matsim.pyx":276
+  /* "matsim/matsim.pyx":281
  *     cdef object conductances
  * 
  *     def __cinit__(self, adaptation=0.07, VS=-10, Ah=0.128, m=0, h=0, n=0, p=0, V=200):             # <<<<<<<<<<<<<<
@@ -6988,7 +7130,7 @@ static int __pyx_pf_6matsim_6matsim_8HHNeuron___cinit__(struct __pyx_obj_6matsim
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":284
+/* "matsim/matsim.pyx":289
  *         # self.mats = mats
  * 
  *     def append_conductance(self, Conductance cond):             # <<<<<<<<<<<<<<
@@ -7002,7 +7144,7 @@ static PyObject *__pyx_pw_6matsim_6matsim_8HHNeuron_3append_conductance(PyObject
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("append_conductance (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cond), __pyx_ptype_6matsim_6matsim_Conductance, 1, "cond", 0))) __PYX_ERR(1, 284, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cond), __pyx_ptype_6matsim_6matsim_Conductance, 1, "cond", 0))) __PYX_ERR(1, 289, __pyx_L1_error)
   __pyx_r = __pyx_pf_6matsim_6matsim_8HHNeuron_2append_conductance(((struct __pyx_obj_6matsim_6matsim_HHNeuron *)__pyx_v_self), ((struct __pyx_obj_6matsim_6matsim_Conductance *)__pyx_v_cond));
 
   /* function exit code */
@@ -7020,16 +7162,16 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_2append_conductance(struct _
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("append_conductance", 0);
 
-  /* "matsim/matsim.pyx":285
+  /* "matsim/matsim.pyx":290
  * 
  *     def append_conductance(self, Conductance cond):
  *         self.conductances.append(cond)             # <<<<<<<<<<<<<<
  *         self.neuron.conductances.push_back(cond.conductance)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Append(__pyx_v_self->conductances, ((PyObject *)__pyx_v_cond)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 285, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Append(__pyx_v_self->conductances, ((PyObject *)__pyx_v_cond)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 290, __pyx_L1_error)
 
-  /* "matsim/matsim.pyx":286
+  /* "matsim/matsim.pyx":291
  *     def append_conductance(self, Conductance cond):
  *         self.conductances.append(cond)
  *         self.neuron.conductances.push_back(cond.conductance)             # <<<<<<<<<<<<<<
@@ -7040,10 +7182,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_2append_conductance(struct _
     __pyx_v_self->neuron.conductances.push_back(__pyx_v_cond->conductance);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 286, __pyx_L1_error)
+    __PYX_ERR(1, 291, __pyx_L1_error)
   }
 
-  /* "matsim/matsim.pyx":284
+  /* "matsim/matsim.pyx":289
  *         # self.mats = mats
  * 
  *     def append_conductance(self, Conductance cond):             # <<<<<<<<<<<<<<
@@ -7063,7 +7205,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_2append_conductance(struct _
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":288
+/* "matsim/matsim.pyx":293
  *         self.neuron.conductances.push_back(cond.conductance)
  * 
  *     cpdef void timestep(self, double dt):             # <<<<<<<<<<<<<<
@@ -7089,10 +7231,10 @@ static void __pyx_f_6matsim_6matsim_8HHNeuron_timestep(struct __pyx_obj_6matsim_
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_timestep); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 288, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_timestep); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 293, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_6matsim_6matsim_8HHNeuron_5timestep)) {
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 288, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 293, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -7108,7 +7250,7 @@ static void __pyx_f_6matsim_6matsim_8HHNeuron_timestep(struct __pyx_obj_6matsim_
         __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 288, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 293, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -7128,7 +7270,7 @@ static void __pyx_f_6matsim_6matsim_8HHNeuron_timestep(struct __pyx_obj_6matsim_
     #endif
   }
 
-  /* "matsim/matsim.pyx":289
+  /* "matsim/matsim.pyx":294
  * 
  *     cpdef void timestep(self, double dt):
  *         self.neuron.timestep(dt)             # <<<<<<<<<<<<<<
@@ -7137,7 +7279,7 @@ static void __pyx_f_6matsim_6matsim_8HHNeuron_timestep(struct __pyx_obj_6matsim_
  */
   __pyx_v_self->neuron.timestep(__pyx_v_dt);
 
-  /* "matsim/matsim.pyx":288
+  /* "matsim/matsim.pyx":293
  *         self.neuron.conductances.push_back(cond.conductance)
  * 
  *     cpdef void timestep(self, double dt):             # <<<<<<<<<<<<<<
@@ -7166,7 +7308,7 @@ static PyObject *__pyx_pw_6matsim_6matsim_8HHNeuron_5timestep(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("timestep (wrapper)", 0);
   assert(__pyx_arg_dt); {
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(__pyx_arg_dt); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 288, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(__pyx_arg_dt); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 293, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7187,7 +7329,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4timestep(struct __pyx_obj_6
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("timestep", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_6matsim_6matsim_8HHNeuron_timestep(__pyx_v_self, __pyx_v_dt, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 288, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_6matsim_6matsim_8HHNeuron_timestep(__pyx_v_self, __pyx_v_dt, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7204,7 +7346,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4timestep(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":291
+/* "matsim/matsim.pyx":296
  *         self.neuron.timestep(dt)
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -7235,20 +7377,20 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_6copy(struct __pyx_obj_6mats
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("copy", 0);
 
-  /* "matsim/matsim.pyx":292
+  /* "matsim/matsim.pyx":297
  * 
  *     def copy(self):
  *         new_neuron = HHNeuron(self.adaptation, self.VS, self.Ah, *self.gate_vars, self.voltage)             # <<<<<<<<<<<<<<
  *         return new_neuron
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->adaptation); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->adaptation); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->VS); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->VS); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->Ah); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->Ah); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -7259,33 +7401,33 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_6copy(struct __pyx_obj_6mats
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_gate_vars); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_gate_vars); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_voltage); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_voltage); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6matsim_6matsim_HHNeuron), __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6matsim_6matsim_HHNeuron), __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_new_neuron = ((struct __pyx_obj_6matsim_6matsim_HHNeuron *)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "matsim/matsim.pyx":293
+  /* "matsim/matsim.pyx":298
  *     def copy(self):
  *         new_neuron = HHNeuron(self.adaptation, self.VS, self.Ah, *self.gate_vars, self.voltage)
  *         return new_neuron             # <<<<<<<<<<<<<<
@@ -7297,7 +7439,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_6copy(struct __pyx_obj_6mats
   __pyx_r = ((PyObject *)__pyx_v_new_neuron);
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":291
+  /* "matsim/matsim.pyx":296
  *         self.neuron.timestep(dt)
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -7320,7 +7462,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_6copy(struct __pyx_obj_6mats
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":297
+/* "matsim/matsim.pyx":302
  *     # Attribute access
  *     @property
  *     def conductance(self):             # <<<<<<<<<<<<<<
@@ -7346,7 +7488,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_11conductance___get__(struct
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":298
+  /* "matsim/matsim.pyx":303
  *     @property
  *     def conductance(self):
  *         return self.conductances             # <<<<<<<<<<<<<<
@@ -7358,7 +7500,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_11conductance___get__(struct
   __pyx_r = __pyx_v_self->conductances;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":297
+  /* "matsim/matsim.pyx":302
  *     # Attribute access
  *     @property
  *     def conductance(self):             # <<<<<<<<<<<<<<
@@ -7373,7 +7515,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_11conductance___get__(struct
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":301
+/* "matsim/matsim.pyx":306
  * 
  *     @property
  *     def voltage(self):             # <<<<<<<<<<<<<<
@@ -7400,7 +7542,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_7voltage___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":302
+  /* "matsim/matsim.pyx":307
  *     @property
  *     def voltage(self):
  *         return self.neuron.V             # <<<<<<<<<<<<<<
@@ -7408,13 +7550,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_7voltage___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.V); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 302, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.V); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":301
+  /* "matsim/matsim.pyx":306
  * 
  *     @property
  *     def voltage(self):             # <<<<<<<<<<<<<<
@@ -7433,7 +7575,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_7voltage___get__(struct __py
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":305
+/* "matsim/matsim.pyx":310
  * 
  *     @property
  *     def i_na(self):             # <<<<<<<<<<<<<<
@@ -7460,7 +7602,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4i_na___get__(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":306
+  /* "matsim/matsim.pyx":311
  *     @property
  *     def i_na(self):
  *         return self.neuron.i_na             # <<<<<<<<<<<<<<
@@ -7468,13 +7610,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4i_na___get__(struct __pyx_o
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_na); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 306, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_na); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":305
+  /* "matsim/matsim.pyx":310
  * 
  *     @property
  *     def i_na(self):             # <<<<<<<<<<<<<<
@@ -7493,7 +7635,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4i_na___get__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":309
+/* "matsim/matsim.pyx":314
  * 
  *     @property
  *     def i_k(self):             # <<<<<<<<<<<<<<
@@ -7520,7 +7662,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_k___get__(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":310
+  /* "matsim/matsim.pyx":315
  *     @property
  *     def i_k(self):
  *         return self.neuron.i_k             # <<<<<<<<<<<<<<
@@ -7528,13 +7670,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_k___get__(struct __pyx_ob
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_k); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 310, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_k); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":309
+  /* "matsim/matsim.pyx":314
  * 
  *     @property
  *     def i_k(self):             # <<<<<<<<<<<<<<
@@ -7553,7 +7695,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_k___get__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":313
+/* "matsim/matsim.pyx":318
  * 
  *     @property
  *     def i_l(self):             # <<<<<<<<<<<<<<
@@ -7580,7 +7722,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_l___get__(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":314
+  /* "matsim/matsim.pyx":319
  *     @property
  *     def i_l(self):
  *         return self.neuron.i_l             # <<<<<<<<<<<<<<
@@ -7588,13 +7730,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_l___get__(struct __pyx_ob
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_l); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 314, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_l); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":313
+  /* "matsim/matsim.pyx":318
  * 
  *     @property
  *     def i_l(self):             # <<<<<<<<<<<<<<
@@ -7613,7 +7755,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_l___get__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":317
+/* "matsim/matsim.pyx":322
  * 
  *     @property
  *     def i_m(self):             # <<<<<<<<<<<<<<
@@ -7640,7 +7782,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_m___get__(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":318
+  /* "matsim/matsim.pyx":323
  *     @property
  *     def i_m(self):
  *         return self.neuron.i_m             # <<<<<<<<<<<<<<
@@ -7648,13 +7790,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_m___get__(struct __pyx_ob
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_m); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 318, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.i_m); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":317
+  /* "matsim/matsim.pyx":322
  * 
  *     @property
  *     def i_m(self):             # <<<<<<<<<<<<<<
@@ -7673,7 +7815,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_3i_m___get__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":321
+/* "matsim/matsim.pyx":326
  * 
  *     @property
  *     def gate_vars(self):             # <<<<<<<<<<<<<<
@@ -7706,7 +7848,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_9gate_vars___get__(struct __
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":322
+  /* "matsim/matsim.pyx":327
  *     @property
  *     def gate_vars(self):
  *         return np.array([             # <<<<<<<<<<<<<<
@@ -7714,36 +7856,36 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_9gate_vars___get__(struct __
  *             ])
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 322, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 322, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "matsim/matsim.pyx":323
+  /* "matsim/matsim.pyx":328
  *     def gate_vars(self):
  *         return np.array([
  *             self.neuron.m, self.neuron.h, self.neuron.n, self.neuron.p             # <<<<<<<<<<<<<<
  *             ])
  * 
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->neuron.m); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->neuron.m); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->neuron.h); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->neuron.h); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->neuron.n); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_self->neuron.n); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_self->neuron.p); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_self->neuron.p); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "matsim/matsim.pyx":322
+  /* "matsim/matsim.pyx":327
  *     @property
  *     def gate_vars(self):
  *         return np.array([             # <<<<<<<<<<<<<<
  *             self.neuron.m, self.neuron.h, self.neuron.n, self.neuron.p
  *             ])
  */
-  __pyx_t_7 = PyList_New(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 322, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_2);
   PyList_SET_ITEM(__pyx_t_7, 0, __pyx_t_2);
@@ -7770,14 +7912,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_9gate_vars___get__(struct __
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_7);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 322, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":321
+  /* "matsim/matsim.pyx":326
  * 
  *     @property
  *     def gate_vars(self):             # <<<<<<<<<<<<<<
@@ -7802,7 +7944,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_9gate_vars___get__(struct __
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":327
+/* "matsim/matsim.pyx":332
  * 
  *     @property
  *     def time(self):             # <<<<<<<<<<<<<<
@@ -7829,7 +7971,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4time___get__(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "matsim/matsim.pyx":328
+  /* "matsim/matsim.pyx":333
  *     @property
  *     def time(self):
  *         return self.neuron.time             # <<<<<<<<<<<<<<
@@ -7837,13 +7979,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4time___get__(struct __pyx_o
  *     def time(self, time):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.time); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 328, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->neuron.time); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":327
+  /* "matsim/matsim.pyx":332
  * 
  *     @property
  *     def time(self):             # <<<<<<<<<<<<<<
@@ -7862,7 +8004,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_4time___get__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":330
+/* "matsim/matsim.pyx":335
  *         return self.neuron.time
  *     @time.setter
  *     def time(self, time):             # <<<<<<<<<<<<<<
@@ -7889,17 +8031,17 @@ static int __pyx_pf_6matsim_6matsim_8HHNeuron_4time_2__set__(struct __pyx_obj_6m
   double __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "matsim/matsim.pyx":331
+  /* "matsim/matsim.pyx":336
  *     @time.setter
  *     def time(self, time):
  *         self.neuron.time = time             # <<<<<<<<<<<<<<
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_time); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 331, __pyx_L1_error)
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_time); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 336, __pyx_L1_error)
   __pyx_v_self->neuron.time = __pyx_t_1;
 
-  /* "matsim/matsim.pyx":330
+  /* "matsim/matsim.pyx":335
  *         return self.neuron.time
  *     @time.setter
  *     def time(self, time):             # <<<<<<<<<<<<<<
@@ -7949,7 +8091,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_8__reduce_cython__(CYTHON_UN
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8002,7 +8144,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_10__setstate_cython__(CYTHON
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8025,7 +8167,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_8HHNeuron_10__setstate_cython__(CYTHON
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":333
+/* "matsim/matsim.pyx":338
  *         self.neuron.time = time
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,             # <<<<<<<<<<<<<<
@@ -8077,35 +8219,35 @@ static PyObject *__pyx_pw_6matsim_6matsim_1sr_experiment(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_time_window)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 1); __PYX_ERR(1, 333, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 1); __PYX_ERR(1, 338, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 2); __PYX_ERR(1, 333, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 2); __PYX_ERR(1, 338, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_intensities)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 3); __PYX_ERR(1, 333, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 3); __PYX_ERR(1, 338, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_intensity_freq_func)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 4); __PYX_ERR(1, 333, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 4); __PYX_ERR(1, 338, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seed)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 5); __PYX_ERR(1, 333, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 5); __PYX_ERR(1, 338, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sr_experiment") < 0)) __PYX_ERR(1, 333, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sr_experiment") < 0)) __PYX_ERR(1, 338, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -8118,21 +8260,21 @@ static PyObject *__pyx_pw_6matsim_6matsim_1sr_experiment(PyObject *__pyx_self, P
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
     }
     __pyx_v_neuron = ((struct __pyx_obj_6matsim_6matsim_Neuron *)values[0]);
-    __pyx_v_time_window = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_time_window == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 333, __pyx_L3_error)
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 333, __pyx_L3_error)
+    __pyx_v_time_window = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_time_window == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 338, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 338, __pyx_L3_error)
     __pyx_v_intensities = values[3];
     __pyx_v_intensity_freq_func = values[4];
-    __pyx_v_seed = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 334, __pyx_L3_error)
+    __pyx_v_seed = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 339, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 333, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 338, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("matsim.matsim.sr_experiment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 333, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 338, __pyx_L1_error)
   __pyx_r = __pyx_pf_6matsim_6matsim_sr_experiment(__pyx_self, __pyx_v_neuron, __pyx_v_time_window, __pyx_v_dt, __pyx_v_intensities, __pyx_v_intensity_freq_func, __pyx_v_seed);
 
   /* function exit code */
@@ -8144,7 +8286,7 @@ static PyObject *__pyx_pw_6matsim_6matsim_1sr_experiment(PyObject *__pyx_self, P
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":350
+/* "matsim/matsim.pyx":355
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()             # <<<<<<<<<<<<<<
@@ -8172,7 +8314,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("lambda", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PySequence_List(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_1 = PySequence_List(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8189,7 +8331,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":333
+/* "matsim/matsim.pyx":338
  *         self.neuron.time = time
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,             # <<<<<<<<<<<<<<
@@ -8232,23 +8374,23 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   int __pyx_t_19;
   __Pyx_RefNannySetupContext("sr_experiment", 0);
 
-  /* "matsim/matsim.pyx":335
+  /* "matsim/matsim.pyx":340
  * def sr_experiment(Neuron neuron, double time_window, double dt,
  *         intensities, intensity_freq_func, int seed):
  *     exc_intensities, inh_intensities = np.array([             # <<<<<<<<<<<<<<
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T * dt
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 335, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 335, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 335, __pyx_L5_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 340, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "matsim/matsim.pyx":337
+    /* "matsim/matsim.pyx":342
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T * dt             # <<<<<<<<<<<<<<
@@ -8259,26 +8401,26 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       __pyx_t_4 = __pyx_v_intensities; __Pyx_INCREF(__pyx_t_4); __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_intensities); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 337, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_intensities); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 342, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 337, __pyx_L5_error)
+      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 342, __pyx_L5_error)
     }
     for (;;) {
       if (likely(!__pyx_t_6)) {
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 337, __pyx_L5_error)
+          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 342, __pyx_L5_error)
           #else
-          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 337, __pyx_L5_error)
+          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 337, __pyx_L5_error)
+          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 342, __pyx_L5_error)
           #else
-          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 337, __pyx_L5_error)
+          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         }
@@ -8288,7 +8430,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(1, 337, __pyx_L5_error)
+            else __PYX_ERR(1, 342, __pyx_L5_error)
           }
           break;
         }
@@ -8297,16 +8439,16 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       __Pyx_XDECREF_SET(__pyx_8genexpr3__pyx_v_i, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "matsim/matsim.pyx":336
+      /* "matsim/matsim.pyx":341
  *         intensities, intensity_freq_func, int seed):
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))             # <<<<<<<<<<<<<<
  *             for i in intensities]).T * dt
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 336, __pyx_L5_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 341, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_array); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 336, __pyx_L5_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_array); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 341, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_INCREF(__pyx_v_intensity_freq_func);
@@ -8322,7 +8464,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       }
       __pyx_t_8 = (__pyx_t_11) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_11, __pyx_8genexpr3__pyx_v_i) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_8genexpr3__pyx_v_i);
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 336, __pyx_L5_error)
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 341, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = NULL;
@@ -8338,13 +8480,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       __pyx_t_7 = (__pyx_t_10) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_10, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_8);
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 336, __pyx_L5_error)
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 341, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 335, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 340, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "matsim/matsim.pyx":337
+      /* "matsim/matsim.pyx":342
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T * dt             # <<<<<<<<<<<<<<
@@ -8373,15 +8515,15 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 335, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8391,7 +8533,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(1, 335, __pyx_L1_error)
+      __PYX_ERR(1, 340, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -8404,15 +8546,15 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 335, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 340, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 335, __pyx_L1_error)
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 340, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_4 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 335, __pyx_L1_error)
+    __pyx_t_4 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 340, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_12 = Py_TYPE(__pyx_t_4)->tp_iternext;
@@ -8420,7 +8562,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
     __Pyx_GOTREF(__pyx_t_1);
     index = 1; __pyx_t_3 = __pyx_t_12(__pyx_t_4); if (unlikely(!__pyx_t_3)) goto __pyx_L9_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_12(__pyx_t_4), 2) < 0) __PYX_ERR(1, 335, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_12(__pyx_t_4), 2) < 0) __PYX_ERR(1, 340, __pyx_L1_error)
     __pyx_t_12 = NULL;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     goto __pyx_L10_unpacking_done;
@@ -8428,11 +8570,11 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_12 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(1, 335, __pyx_L1_error)
+    __PYX_ERR(1, 340, __pyx_L1_error)
     __pyx_L10_unpacking_done:;
   }
 
-  /* "matsim/matsim.pyx":335
+  /* "matsim/matsim.pyx":340
  * def sr_experiment(Neuron neuron, double time_window, double dt,
  *         intensities, intensity_freq_func, int seed):
  *     exc_intensities, inh_intensities = np.array([             # <<<<<<<<<<<<<<
@@ -8444,7 +8586,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   __pyx_v_inh_intensities = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "matsim/matsim.pyx":339
+  /* "matsim/matsim.pyx":344
  *             for i in intensities]).T * dt
  * 
  *     cdef CNeuron c_neuron = neuron.neuron             # <<<<<<<<<<<<<<
@@ -8454,27 +8596,27 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   __pyx_t_13 = __pyx_v_neuron->neuron;
   __pyx_v_c_neuron = __pyx_t_13;
 
-  /* "matsim/matsim.pyx":340
+  /* "matsim/matsim.pyx":345
  * 
  *     cdef CNeuron c_neuron = neuron.neuron
  *     cdef vector[double] c_exc = exc_intensities             # <<<<<<<<<<<<<<
  *     cdef vector[double] c_inh = inh_intensities
  *     cdef vector[int] results
  */
-  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_exc_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 340, __pyx_L1_error)
+  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_exc_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 345, __pyx_L1_error)
   __pyx_v_c_exc = __pyx_t_14;
 
-  /* "matsim/matsim.pyx":341
+  /* "matsim/matsim.pyx":346
  *     cdef CNeuron c_neuron = neuron.neuron
  *     cdef vector[double] c_exc = exc_intensities
  *     cdef vector[double] c_inh = inh_intensities             # <<<<<<<<<<<<<<
  *     cdef vector[int] results
  * 
  */
-  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_inh_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 341, __pyx_L1_error)
+  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_inh_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 346, __pyx_L1_error)
   __pyx_v_c_inh = __pyx_t_14;
 
-  /* "matsim/matsim.pyx":344
+  /* "matsim/matsim.pyx":349
  *     cdef vector[int] results
  * 
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]             # <<<<<<<<<<<<<<
@@ -8482,7 +8624,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
  *     results = _sr_experiment(c_neuron, time_window, dt, c_exc, c_inh, seed)
  */
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 344, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 349, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_16 = &__pyx_v_neuron->mat_names;
     __pyx_t_15 = __pyx_t_16->begin();
@@ -8491,16 +8633,16 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       __pyx_t_17 = *__pyx_t_15;
       ++__pyx_t_15;
       __pyx_8genexpr4__pyx_v_name = __pyx_t_17;
-      __pyx_t_3 = __Pyx_decode_cpp_string(__pyx_8genexpr4__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 344, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_decode_cpp_string(__pyx_8genexpr4__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 349, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(1, 344, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_3))) __PYX_ERR(1, 349, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
   } /* exit inner scope */
   __pyx_v_mat_names = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "matsim/matsim.pyx":346
+  /* "matsim/matsim.pyx":351
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
  * 
  *     results = _sr_experiment(c_neuron, time_window, dt, c_exc, c_inh, seed)             # <<<<<<<<<<<<<<
@@ -8509,20 +8651,20 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
  */
   __pyx_v_results = sr_experiment(__pyx_v_c_neuron, __pyx_v_time_window, __pyx_v_dt, __pyx_v_c_exc, __pyx_v_c_inh, __pyx_v_seed);
 
-  /* "matsim/matsim.pyx":347
+  /* "matsim/matsim.pyx":352
  * 
  *     results = _sr_experiment(c_neuron, time_window, dt, c_exc, c_inh, seed)
  *     result_array = np.array([x for x in results])             # <<<<<<<<<<<<<<
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 347, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 347, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 347, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 352, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_18 = __pyx_v_results.begin();
     for (;;) {
@@ -8530,9 +8672,9 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
       __pyx_t_19 = *__pyx_t_18;
       ++__pyx_t_18;
       __pyx_8genexpr5__pyx_v_x = __pyx_t_19;
-      __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_8genexpr5__pyx_v_x); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 347, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_8genexpr5__pyx_v_x); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 352, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_4))) __PYX_ERR(1, 347, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_4))) __PYX_ERR(1, 352, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   } /* exit inner scope */
@@ -8549,13 +8691,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 347, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_result_array = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "matsim/matsim.pyx":349
+  /* "matsim/matsim.pyx":354
  *     result_array = np.array([x for x in results])
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\             # <<<<<<<<<<<<<<
@@ -8564,30 +8706,30 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "matsim/matsim.pyx":350
+  /* "matsim/matsim.pyx":355
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()             # <<<<<<<<<<<<<<
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "matsim/matsim.pyx":349
+  /* "matsim/matsim.pyx":354
  *     result_array = np.array([x for x in results])
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\             # <<<<<<<<<<<<<<
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_result_array, __pyx_n_s_reshape); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_result_array, __pyx_n_s_reshape); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_mat_names); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(1, 349, __pyx_L1_error)
-  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_mat_names); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(1, 354, __pyx_L1_error)
+  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_10 = NULL;
   __pyx_t_19 = 0;
@@ -8604,7 +8746,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_int_neg_1, __pyx_t_8};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_19, 2+__pyx_t_19); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_19, 2+__pyx_t_19); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -8613,14 +8755,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_int_neg_1, __pyx_t_8};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_19, 2+__pyx_t_19); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_19, 2+__pyx_t_19); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   } else
   #endif
   {
-    __pyx_t_11 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 349, __pyx_L1_error)
+    __pyx_t_11 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_10) {
       __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -8631,47 +8773,47 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
     __Pyx_GIVEREF(__pyx_t_8);
     PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_19, __pyx_t_8);
     __pyx_t_8 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_11, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_11, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_columns, __pyx_v_mat_names) < 0) __PYX_ERR(1, 349, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_index, __pyx_v_intensities) < 0) __PYX_ERR(1, 349, __pyx_L1_error)
-  __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 349, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_columns, __pyx_v_mat_names) < 0) __PYX_ERR(1, 354, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_index, __pyx_v_intensities) < 0) __PYX_ERR(1, 354, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_groupby); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 349, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_groupby); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "matsim/matsim.pyx":350
+  /* "matsim/matsim.pyx":355
  * 
  *     return pd.DataFrame(result_array.reshape(-1, len(mat_names)), columns=mat_names, index=intensities).\
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()             # <<<<<<<<<<<<<<
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):
  */
-  __pyx_t_11 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_level, __pyx_int_0) < 0) __PYX_ERR(1, 350, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 350, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_level, __pyx_int_0) < 0) __PYX_ERR(1, 355, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_agg); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_agg); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6matsim_6matsim_13sr_experiment_lambda, 0, __pyx_n_s_sr_experiment_locals_lambda, NULL, __pyx_n_s_matsim_matsim, __pyx_d, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6matsim_6matsim_13sr_experiment_lambda, 0, __pyx_n_s_sr_experiment_locals_lambda, NULL, __pyx_n_s_matsim_matsim, __pyx_d, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_11))) {
@@ -8686,10 +8828,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   __pyx_t_3 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_11, __pyx_t_4, __pyx_t_9) : __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_9);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 350, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_stack); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_stack); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -8704,10 +8846,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 350, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_swaplevel); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 350, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_swaplevel); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -8722,14 +8864,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   }
   __pyx_t_2 = (__pyx_t_1) ? __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1) : __Pyx_PyObject_CallNoArg(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 350, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":333
+  /* "matsim/matsim.pyx":338
  *         self.neuron.time = time
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,             # <<<<<<<<<<<<<<
@@ -8761,7 +8903,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":352
+/* "matsim/matsim.pyx":357
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):             # <<<<<<<<<<<<<<
@@ -8813,35 +8955,35 @@ static PyObject *__pyx_pw_6matsim_6matsim_3sr_experiment(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_time_windows)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 1); __PYX_ERR(1, 352, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 1); __PYX_ERR(1, 357, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 2); __PYX_ERR(1, 352, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 2); __PYX_ERR(1, 357, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_intensities)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 3); __PYX_ERR(1, 352, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 3); __PYX_ERR(1, 357, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_intensity_freq_func)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 4); __PYX_ERR(1, 352, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 4); __PYX_ERR(1, 357, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seed)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 5); __PYX_ERR(1, 352, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, 5); __PYX_ERR(1, 357, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sr_experiment") < 0)) __PYX_ERR(1, 352, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sr_experiment") < 0)) __PYX_ERR(1, 357, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -8862,13 +9004,13 @@ static PyObject *__pyx_pw_6matsim_6matsim_3sr_experiment(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 352, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sr_experiment", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 357, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("matsim.matsim.sr_experiment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 352, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 357, __pyx_L1_error)
   __pyx_r = __pyx_pf_6matsim_6matsim_2sr_experiment(__pyx_self, __pyx_v_neuron, __pyx_v_time_windows, __pyx_v_dt, __pyx_v_intensities, __pyx_v_intensity_freq_func, __pyx_v_seed);
 
   /* function exit code */
@@ -8880,7 +9022,7 @@ static PyObject *__pyx_pw_6matsim_6matsim_3sr_experiment(PyObject *__pyx_self, P
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":376
+/* "matsim/matsim.pyx":381
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))             # <<<<<<<<<<<<<<
@@ -8908,7 +9050,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("lambda1", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PySequence_List(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 376, __pyx_L1_error)
+  __pyx_t_1 = PySequence_List(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 381, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8925,7 +9067,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":352
+/* "matsim/matsim.pyx":357
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):             # <<<<<<<<<<<<<<
@@ -8978,23 +9120,23 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   PyObject *__pyx_t_25 = NULL;
   __Pyx_RefNannySetupContext("sr_experiment", 0);
 
-  /* "matsim/matsim.pyx":353
+  /* "matsim/matsim.pyx":358
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):
  *     exc_intensities, inh_intensities = np.array([             # <<<<<<<<<<<<<<
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 353, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 353, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 353, __pyx_L5_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "matsim/matsim.pyx":355
+    /* "matsim/matsim.pyx":360
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T             # <<<<<<<<<<<<<<
@@ -9005,26 +9147,26 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __pyx_t_4 = __pyx_v_intensities; __Pyx_INCREF(__pyx_t_4); __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_intensities); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 355, __pyx_L5_error)
+      __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_intensities); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 360, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 355, __pyx_L5_error)
+      __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 360, __pyx_L5_error)
     }
     for (;;) {
       if (likely(!__pyx_t_6)) {
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 355, __pyx_L5_error)
+          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 360, __pyx_L5_error)
           #else
-          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 355, __pyx_L5_error)
+          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 360, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 355, __pyx_L5_error)
+          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_7); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 360, __pyx_L5_error)
           #else
-          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 355, __pyx_L5_error)
+          __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 360, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         }
@@ -9034,7 +9176,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(1, 355, __pyx_L5_error)
+            else __PYX_ERR(1, 360, __pyx_L5_error)
           }
           break;
         }
@@ -9043,16 +9185,16 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __Pyx_XDECREF_SET(__pyx_8genexpr6__pyx_v_i, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "matsim/matsim.pyx":354
+      /* "matsim/matsim.pyx":359
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))             # <<<<<<<<<<<<<<
  *             for i in intensities]).T
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 354, __pyx_L5_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 359, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_array); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 354, __pyx_L5_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_array); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 359, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_INCREF(__pyx_v_intensity_freq_func);
@@ -9068,7 +9210,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       }
       __pyx_t_8 = (__pyx_t_11) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_11, __pyx_8genexpr6__pyx_v_i) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_8genexpr6__pyx_v_i);
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 354, __pyx_L5_error)
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 359, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = NULL;
@@ -9084,13 +9226,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __pyx_t_7 = (__pyx_t_10) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_10, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_8);
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 354, __pyx_L5_error)
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 359, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 353, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 358, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "matsim/matsim.pyx":355
+      /* "matsim/matsim.pyx":360
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  *             for i in intensities]).T             # <<<<<<<<<<<<<<
@@ -9119,10 +9261,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 353, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 355, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 360, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if ((likely(PyTuple_CheckExact(__pyx_t_3))) || (PyList_CheckExact(__pyx_t_3))) {
@@ -9131,7 +9273,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(1, 353, __pyx_L1_error)
+      __PYX_ERR(1, 358, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -9144,15 +9286,15 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_t_2);
     #else
-    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     #endif
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_12 = Py_TYPE(__pyx_t_4)->tp_iternext;
@@ -9160,7 +9302,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __Pyx_GOTREF(__pyx_t_1);
     index = 1; __pyx_t_2 = __pyx_t_12(__pyx_t_4); if (unlikely(!__pyx_t_2)) goto __pyx_L9_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_12(__pyx_t_4), 2) < 0) __PYX_ERR(1, 353, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_12(__pyx_t_4), 2) < 0) __PYX_ERR(1, 358, __pyx_L1_error)
     __pyx_t_12 = NULL;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     goto __pyx_L10_unpacking_done;
@@ -9168,11 +9310,11 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_12 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(1, 353, __pyx_L1_error)
+    __PYX_ERR(1, 358, __pyx_L1_error)
     __pyx_L10_unpacking_done:;
   }
 
-  /* "matsim/matsim.pyx":353
+  /* "matsim/matsim.pyx":358
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):
  *     exc_intensities, inh_intensities = np.array([             # <<<<<<<<<<<<<<
@@ -9184,7 +9326,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   __pyx_v_inh_intensities = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "matsim/matsim.pyx":357
+  /* "matsim/matsim.pyx":362
  *             for i in intensities]).T
  * 
  *     cdef CNeuron c_neuron = neuron.neuron             # <<<<<<<<<<<<<<
@@ -9194,27 +9336,27 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   __pyx_t_13 = __pyx_v_neuron->neuron;
   __pyx_v_c_neuron = __pyx_t_13;
 
-  /* "matsim/matsim.pyx":358
+  /* "matsim/matsim.pyx":363
  * 
  *     cdef CNeuron c_neuron = neuron.neuron
  *     cdef vector[double] c_exc = exc_intensities             # <<<<<<<<<<<<<<
  *     cdef vector[double] c_inh = inh_intensities
  *     cdef vector[vector[double]] results
  */
-  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_exc_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 358, __pyx_L1_error)
+  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_exc_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 363, __pyx_L1_error)
   __pyx_v_c_exc = __pyx_t_14;
 
-  /* "matsim/matsim.pyx":359
+  /* "matsim/matsim.pyx":364
  *     cdef CNeuron c_neuron = neuron.neuron
  *     cdef vector[double] c_exc = exc_intensities
  *     cdef vector[double] c_inh = inh_intensities             # <<<<<<<<<<<<<<
  *     cdef vector[vector[double]] results
  *     cdef double st
  */
-  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_inh_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 359, __pyx_L1_error)
+  __pyx_t_14 = __pyx_convert_vector_from_py_double(__pyx_v_inh_intensities); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 364, __pyx_L1_error)
   __pyx_v_c_inh = __pyx_t_14;
 
-  /* "matsim/matsim.pyx":363
+  /* "matsim/matsim.pyx":368
  *     cdef double st
  * 
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]             # <<<<<<<<<<<<<<
@@ -9222,7 +9364,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
  *     results = _sr_experiment_spike_times(c_neuron, max(time_windows), dt, c_exc, c_inh, seed)
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 363, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 368, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_16 = &__pyx_v_neuron->mat_names;
     __pyx_t_15 = __pyx_t_16->begin();
@@ -9231,31 +9373,31 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __pyx_t_17 = *__pyx_t_15;
       ++__pyx_t_15;
       __pyx_8genexpr7__pyx_v_name = __pyx_t_17;
-      __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_8genexpr7__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 363, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_8genexpr7__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(1, 363, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(1, 368, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
   } /* exit inner scope */
   __pyx_v_mat_names = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "matsim/matsim.pyx":365
+  /* "matsim/matsim.pyx":370
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
  * 
  *     results = _sr_experiment_spike_times(c_neuron, max(time_windows), dt, c_exc, c_inh, seed)             # <<<<<<<<<<<<<<
  *     result_python = [
  *         np.array([st for st in spike_times]) for spike_times in results
  */
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_max, __pyx_v_time_windows); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 365, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_max, __pyx_v_time_windows); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 370, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 365, __pyx_L1_error)
+  __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 370, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_dt); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 365, __pyx_L1_error)
-  __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 365, __pyx_L1_error)
+  __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_dt); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 370, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 370, __pyx_L1_error)
   __pyx_v_results = sr_experiment_spike_times(__pyx_v_c_neuron, __pyx_t_18, __pyx_t_19, __pyx_v_c_exc, __pyx_v_c_inh, __pyx_t_20);
 
-  /* "matsim/matsim.pyx":366
+  /* "matsim/matsim.pyx":371
  * 
  *     results = _sr_experiment_spike_times(c_neuron, max(time_windows), dt, c_exc, c_inh, seed)
  *     result_python = [             # <<<<<<<<<<<<<<
@@ -9263,10 +9405,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
  *     ]
  */
   { /* enter inner scope */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 366, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 371, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
 
-    /* "matsim/matsim.pyx":367
+    /* "matsim/matsim.pyx":372
  *     results = _sr_experiment_spike_times(c_neuron, max(time_windows), dt, c_exc, c_inh, seed)
  *     result_python = [
  *         np.array([st for st in spike_times]) for spike_times in results             # <<<<<<<<<<<<<<
@@ -9279,13 +9421,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __pyx_t_14 = *__pyx_t_21;
       ++__pyx_t_21;
       __pyx_8genexpr8__pyx_v_spike_times = __pyx_t_14;
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 367, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 372, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 367, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 372, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       { /* enter inner scope */
-        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 367, __pyx_L1_error)
+        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 372, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_t_22 = __pyx_8genexpr8__pyx_v_spike_times.begin();
         for (;;) {
@@ -9293,9 +9435,9 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
           __pyx_t_19 = *__pyx_t_22;
           ++__pyx_t_22;
           __pyx_8genexpr9__pyx_v_st = __pyx_t_19;
-          __pyx_t_7 = PyFloat_FromDouble(__pyx_8genexpr9__pyx_v_st); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 367, __pyx_L1_error)
+          __pyx_t_7 = PyFloat_FromDouble(__pyx_8genexpr9__pyx_v_st); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 372, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 367, __pyx_L1_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(1, 372, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
       } /* exit inner scope */
@@ -9312,29 +9454,29 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __pyx_t_2 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_7, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1);
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 367, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 372, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(1, 366, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(1, 371, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
   } /* exit inner scope */
   __pyx_v_result_python = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "matsim/matsim.pyx":370
+  /* "matsim/matsim.pyx":375
  *     ]
  * 
  *     result_dict = {}             # <<<<<<<<<<<<<<
  * 
  *     for tw in time_windows:
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 370, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_result_dict = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "matsim/matsim.pyx":372
+  /* "matsim/matsim.pyx":377
  *     result_dict = {}
  * 
  *     for tw in time_windows:             # <<<<<<<<<<<<<<
@@ -9345,26 +9487,26 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __pyx_t_3 = __pyx_v_time_windows; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
   } else {
-    __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_time_windows); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 372, __pyx_L1_error)
+    __pyx_t_5 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_time_windows); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 377, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 372, __pyx_L1_error)
+    __pyx_t_6 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 377, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_6)) {
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 372, __pyx_L1_error)
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 377, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 372, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 377, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 372, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(1, 377, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 372, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 377, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -9374,7 +9516,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(1, 372, __pyx_L1_error)
+          else __PYX_ERR(1, 377, __pyx_L1_error)
         }
         break;
       }
@@ -9383,47 +9525,47 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __Pyx_XDECREF_SET(__pyx_v_tw, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "matsim/matsim.pyx":373
+    /* "matsim/matsim.pyx":378
  * 
  *     for tw in time_windows:
  *         result_dict[tw] = pd.DataFrame(             # <<<<<<<<<<<<<<
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 373, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 378, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 373, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 378, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "matsim/matsim.pyx":374
+    /* "matsim/matsim.pyx":379
  *     for tw in time_windows:
  *         result_dict[tw] = pd.DataFrame(
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),             # <<<<<<<<<<<<<<
  *             columns=mat_names,
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 374, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_array); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 374, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_array); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     { /* enter inner scope */
-      __pyx_t_9 = PyList_New(0); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 374, __pyx_L21_error)
+      __pyx_t_9 = PyList_New(0); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 379, __pyx_L21_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_10 = __pyx_v_result_python; __Pyx_INCREF(__pyx_t_10); __pyx_t_23 = 0;
       for (;;) {
         if (__pyx_t_23 >= PyList_GET_SIZE(__pyx_t_10)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_11 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_23); __Pyx_INCREF(__pyx_t_11); __pyx_t_23++; if (unlikely(0 < 0)) __PYX_ERR(1, 374, __pyx_L21_error)
+        __pyx_t_11 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_23); __Pyx_INCREF(__pyx_t_11); __pyx_t_23++; if (unlikely(0 < 0)) __PYX_ERR(1, 379, __pyx_L21_error)
         #else
-        __pyx_t_11 = PySequence_ITEM(__pyx_t_10, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 374, __pyx_L21_error)
+        __pyx_t_11 = PySequence_ITEM(__pyx_t_10, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 379, __pyx_L21_error)
         __Pyx_GOTREF(__pyx_t_11);
         #endif
         __Pyx_XDECREF_SET(__pyx_9genexpr10__pyx_v_x, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_24 = PyObject_RichCompare(__pyx_9genexpr10__pyx_v_x, __pyx_v_tw, Py_LT); __Pyx_XGOTREF(__pyx_t_24); if (unlikely(!__pyx_t_24)) __PYX_ERR(1, 374, __pyx_L21_error)
-        __pyx_t_25 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_sum); if (unlikely(!__pyx_t_25)) __PYX_ERR(1, 374, __pyx_L21_error)
+        __pyx_t_24 = PyObject_RichCompare(__pyx_9genexpr10__pyx_v_x, __pyx_v_tw, Py_LT); __Pyx_XGOTREF(__pyx_t_24); if (unlikely(!__pyx_t_24)) __PYX_ERR(1, 379, __pyx_L21_error)
+        __pyx_t_25 = __Pyx_PyObject_GetAttrStr(__pyx_t_24, __pyx_n_s_sum); if (unlikely(!__pyx_t_25)) __PYX_ERR(1, 379, __pyx_L21_error)
         __Pyx_GOTREF(__pyx_t_25);
         __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
         __pyx_t_24 = NULL;
@@ -9438,10 +9580,10 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
         }
         __pyx_t_11 = (__pyx_t_24) ? __Pyx_PyObject_CallOneArg(__pyx_t_25, __pyx_t_24) : __Pyx_PyObject_CallNoArg(__pyx_t_25);
         __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
-        if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 374, __pyx_L21_error)
+        if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 379, __pyx_L21_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_9, (PyObject*)__pyx_t_11))) __PYX_ERR(1, 374, __pyx_L21_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_9, (PyObject*)__pyx_t_11))) __PYX_ERR(1, 379, __pyx_L21_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -9465,14 +9607,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __pyx_t_7 = (__pyx_t_10) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_10, __pyx_t_9) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_9);
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 374, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_reshape); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 374, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_reshape); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_23 = PyList_GET_SIZE(__pyx_v_mat_names); if (unlikely(__pyx_t_23 == ((Py_ssize_t)-1))) __PYX_ERR(1, 374, __pyx_L1_error)
-    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_23); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 374, __pyx_L1_error)
+    __pyx_t_23 = PyList_GET_SIZE(__pyx_v_mat_names); if (unlikely(__pyx_t_23 == ((Py_ssize_t)-1))) __PYX_ERR(1, 379, __pyx_L1_error)
+    __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_23); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 379, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_9 = NULL;
     __pyx_t_20 = 0;
@@ -9489,7 +9631,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_int_neg_1, __pyx_t_7};
-      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_20, 2+__pyx_t_20); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 374, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_20, 2+__pyx_t_20); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 379, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -9498,14 +9640,14 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
       PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_int_neg_1, __pyx_t_7};
-      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_20, 2+__pyx_t_20); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 374, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-__pyx_t_20, 2+__pyx_t_20); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 379, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     } else
     #endif
     {
-      __pyx_t_10 = PyTuple_New(2+__pyx_t_20); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 374, __pyx_L1_error)
+      __pyx_t_10 = PyTuple_New(2+__pyx_t_20); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 379, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       if (__pyx_t_9) {
         __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -9516,79 +9658,79 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
       __Pyx_GIVEREF(__pyx_t_7);
       PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_20, __pyx_t_7);
       __pyx_t_7 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 374, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 379, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     }
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "matsim/matsim.pyx":373
+    /* "matsim/matsim.pyx":378
  * 
  *     for tw in time_windows:
  *         result_dict[tw] = pd.DataFrame(             # <<<<<<<<<<<<<<
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  */
-    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 373, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 378, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "matsim/matsim.pyx":375
+    /* "matsim/matsim.pyx":380
  *         result_dict[tw] = pd.DataFrame(
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,             # <<<<<<<<<<<<<<
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))
  * 
  */
-    __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 375, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 380, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_columns, __pyx_v_mat_names) < 0) __PYX_ERR(1, 375, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_columns, __pyx_v_mat_names) < 0) __PYX_ERR(1, 380, __pyx_L1_error)
 
-    /* "matsim/matsim.pyx":376
+    /* "matsim/matsim.pyx":381
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))             # <<<<<<<<<<<<<<
  * 
  *     return result_dict
  */
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_index, __pyx_v_intensities) < 0) __PYX_ERR(1, 375, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_index, __pyx_v_intensities) < 0) __PYX_ERR(1, 380, __pyx_L1_error)
 
-    /* "matsim/matsim.pyx":373
+    /* "matsim/matsim.pyx":378
  * 
  *     for tw in time_windows:
  *         result_dict[tw] = pd.DataFrame(             # <<<<<<<<<<<<<<
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  */
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 373, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 378, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "matsim/matsim.pyx":376
+    /* "matsim/matsim.pyx":381
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))             # <<<<<<<<<<<<<<
  * 
  *     return result_dict
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_groupby); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 376, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_groupby); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 376, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_level, __pyx_int_0) < 0) __PYX_ERR(1, 376, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 376, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_level, __pyx_int_0) < 0) __PYX_ERR(1, 381, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_agg); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 376, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_agg); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6matsim_6matsim_13sr_experiment_1lambda1, 0, __pyx_n_s_sr_experiment_locals_lambda, NULL, __pyx_n_s_matsim_matsim, __pyx_d, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 376, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6matsim_6matsim_13sr_experiment_1lambda1, 0, __pyx_n_s_sr_experiment_locals_lambda, NULL, __pyx_n_s_matsim_matsim, __pyx_d, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_10))) {
@@ -9603,21 +9745,21 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
     __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_4, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_8);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 376, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 381, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-    /* "matsim/matsim.pyx":373
+    /* "matsim/matsim.pyx":378
  * 
  *     for tw in time_windows:
  *         result_dict[tw] = pd.DataFrame(             # <<<<<<<<<<<<<<
  *             np.array([ (x < tw).sum() for x in result_python ]).reshape(-1, len(mat_names)),
  *             columns=mat_names,
  */
-    if (unlikely(PyDict_SetItem(__pyx_v_result_dict, __pyx_v_tw, __pyx_t_2) < 0)) __PYX_ERR(1, 373, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_result_dict, __pyx_v_tw, __pyx_t_2) < 0)) __PYX_ERR(1, 378, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "matsim/matsim.pyx":372
+    /* "matsim/matsim.pyx":377
  *     result_dict = {}
  * 
  *     for tw in time_windows:             # <<<<<<<<<<<<<<
@@ -9627,7 +9769,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "matsim/matsim.pyx":378
+  /* "matsim/matsim.pyx":383
  *             index=intensities).groupby(level=0).agg(lambda x: list(x))
  * 
  *     return result_dict             # <<<<<<<<<<<<<<
@@ -9639,7 +9781,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   __pyx_r = __pyx_v_result_dict;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":352
+  /* "matsim/matsim.pyx":357
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):             # <<<<<<<<<<<<<<
@@ -9676,7 +9818,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "matsim/matsim.pyx":380
+/* "matsim/matsim.pyx":385
  *     return result_dict
  * 
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):             # <<<<<<<<<<<<<<
@@ -9725,29 +9867,29 @@ static PyObject *__pyx_pw_6matsim_6matsim_5steady_spike_train(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_time)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 1); __PYX_ERR(1, 380, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 1); __PYX_ERR(1, 385, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 2); __PYX_ERR(1, 380, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 2); __PYX_ERR(1, 385, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_exc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 3); __PYX_ERR(1, 380, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 3); __PYX_ERR(1, 385, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_inh)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 4); __PYX_ERR(1, 380, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, 4); __PYX_ERR(1, 385, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "steady_spike_train") < 0)) __PYX_ERR(1, 380, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "steady_spike_train") < 0)) __PYX_ERR(1, 385, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -9759,20 +9901,20 @@ static PyObject *__pyx_pw_6matsim_6matsim_5steady_spike_train(PyObject *__pyx_se
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
     }
     __pyx_v_neuron = ((struct __pyx_obj_6matsim_6matsim_Neuron *)values[0]);
-    __pyx_v_time = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_time == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 380, __pyx_L3_error)
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 380, __pyx_L3_error)
+    __pyx_v_time = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_time == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 385, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 385, __pyx_L3_error)
     __pyx_v_exc = values[3];
     __pyx_v_inh = values[4];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 380, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("steady_spike_train", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 385, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("matsim.matsim.steady_spike_train", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 380, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_Neuron, 1, "neuron", 0))) __PYX_ERR(1, 385, __pyx_L1_error)
   __pyx_r = __pyx_pf_6matsim_6matsim_4steady_spike_train(__pyx_self, __pyx_v_neuron, __pyx_v_time, __pyx_v_dt, __pyx_v_exc, __pyx_v_inh);
 
   /* function exit code */
@@ -9813,7 +9955,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
   PyObject *__pyx_t_14 = NULL;
   __Pyx_RefNannySetupContext("steady_spike_train", 0);
 
-  /* "matsim/matsim.pyx":381
+  /* "matsim/matsim.pyx":386
  * 
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]             # <<<<<<<<<<<<<<
@@ -9821,7 +9963,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  *     cdef vector[double] spike_times
  */
   { /* enter inner scope */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 381, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 386, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = &__pyx_v_neuron->mat_names;
     __pyx_t_2 = __pyx_t_3->begin();
@@ -9830,28 +9972,28 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
       __pyx_t_4 = *__pyx_t_2;
       ++__pyx_t_2;
       __pyx_9genexpr11__pyx_v_name = __pyx_t_4;
-      __pyx_t_5 = __Pyx_decode_cpp_string(__pyx_9genexpr11__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 381, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_decode_cpp_string(__pyx_9genexpr11__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 386, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(1, 381, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(1, 386, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
   } /* exit inner scope */
   __pyx_v_mat_names = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":382
+  /* "matsim/matsim.pyx":387
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
  *     spike_trains = {}             # <<<<<<<<<<<<<<
  *     cdef vector[double] spike_times
  *     cdef CMATThresholds* mat
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 382, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_spike_trains = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":387
+  /* "matsim/matsim.pyx":392
  *     cdef CConductance *conductance
  * 
  *     conductance = neuron.neuron.conductances[0]             # <<<<<<<<<<<<<<
@@ -9860,17 +10002,17 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
   __pyx_v_conductance = (__pyx_v_neuron->neuron.conductances[0]);
 
-  /* "matsim/matsim.pyx":388
+  /* "matsim/matsim.pyx":393
  * 
  *     conductance = neuron.neuron.conductances[0]
  *     deref(conductance).set_rate(exc)             # <<<<<<<<<<<<<<
  * 
  *     conductance = neuron.neuron.conductances[1]
  */
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_exc); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 388, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_exc); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 393, __pyx_L1_error)
   (*__pyx_v_conductance).set_rate(__pyx_t_6);
 
-  /* "matsim/matsim.pyx":390
+  /* "matsim/matsim.pyx":395
  *     deref(conductance).set_rate(exc)
  * 
  *     conductance = neuron.neuron.conductances[1]             # <<<<<<<<<<<<<<
@@ -9879,17 +10021,17 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
   __pyx_v_conductance = (__pyx_v_neuron->neuron.conductances[1]);
 
-  /* "matsim/matsim.pyx":391
+  /* "matsim/matsim.pyx":396
  * 
  *     conductance = neuron.neuron.conductances[1]
  *     deref(conductance).set_rate(inh)             # <<<<<<<<<<<<<<
  * 
  *     cdef double tot_time = 0
  */
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_inh); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 391, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_inh); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 396, __pyx_L1_error)
   (*__pyx_v_conductance).set_rate(__pyx_t_6);
 
-  /* "matsim/matsim.pyx":393
+  /* "matsim/matsim.pyx":398
  *     deref(conductance).set_rate(inh)
  * 
  *     cdef double tot_time = 0             # <<<<<<<<<<<<<<
@@ -9898,7 +10040,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
   __pyx_v_tot_time = 0.0;
 
-  /* "matsim/matsim.pyx":394
+  /* "matsim/matsim.pyx":399
  * 
  *     cdef double tot_time = 0
  *     while tot_time < time:             # <<<<<<<<<<<<<<
@@ -9909,7 +10051,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
     __pyx_t_7 = ((__pyx_v_tot_time < __pyx_v_time) != 0);
     if (!__pyx_t_7) break;
 
-    /* "matsim/matsim.pyx":395
+    /* "matsim/matsim.pyx":400
  *     cdef double tot_time = 0
  *     while tot_time < time:
  *         neuron.timestep(dt)             # <<<<<<<<<<<<<<
@@ -9918,7 +10060,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
     ((struct __pyx_vtabstruct_6matsim_6matsim_Neuron *)__pyx_v_neuron->__pyx_vtab)->timestep(__pyx_v_neuron, __pyx_v_dt, 0);
 
-    /* "matsim/matsim.pyx":396
+    /* "matsim/matsim.pyx":401
  *     while tot_time < time:
  *         neuron.timestep(dt)
  *         tot_time += dt             # <<<<<<<<<<<<<<
@@ -9928,7 +10070,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
     __pyx_v_tot_time = (__pyx_v_tot_time + __pyx_v_dt);
   }
 
-  /* "matsim/matsim.pyx":398
+  /* "matsim/matsim.pyx":403
  *         tot_time += dt
  * 
  *     for i, name in enumerate(mat_names):             # <<<<<<<<<<<<<<
@@ -9941,32 +10083,32 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
   for (;;) {
     if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_5)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_9 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_8); __Pyx_INCREF(__pyx_t_9); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(1, 398, __pyx_L1_error)
+    __pyx_t_9 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_8); __Pyx_INCREF(__pyx_t_9); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(1, 403, __pyx_L1_error)
     #else
-    __pyx_t_9 = PySequence_ITEM(__pyx_t_5, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 398, __pyx_L1_error)
+    __pyx_t_9 = PySequence_ITEM(__pyx_t_5, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_name, __pyx_t_9);
     __pyx_t_9 = 0;
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
-    __pyx_t_9 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 398, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_1);
     __pyx_t_1 = __pyx_t_9;
     __pyx_t_9 = 0;
 
-    /* "matsim/matsim.pyx":399
+    /* "matsim/matsim.pyx":404
  * 
  *     for i, name in enumerate(mat_names):
  *         mat = neuron.neuron.mats[i]             # <<<<<<<<<<<<<<
  *         spike_times = deref(mat).get_spike_times()
  *         deref(mat).reset_spike_times()
  */
-    __pyx_t_10 = __Pyx_PyInt_As_size_t(__pyx_v_i); if (unlikely((__pyx_t_10 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(1, 399, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_As_size_t(__pyx_v_i); if (unlikely((__pyx_t_10 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(1, 404, __pyx_L1_error)
     __pyx_v_mat = (__pyx_v_neuron->neuron.mats[__pyx_t_10]);
 
-    /* "matsim/matsim.pyx":400
+    /* "matsim/matsim.pyx":405
  *     for i, name in enumerate(mat_names):
  *         mat = neuron.neuron.mats[i]
  *         spike_times = deref(mat).get_spike_times()             # <<<<<<<<<<<<<<
@@ -9975,7 +10117,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
     __pyx_v_spike_times = (*__pyx_v_mat).get_spike_times();
 
-    /* "matsim/matsim.pyx":401
+    /* "matsim/matsim.pyx":406
  *         mat = neuron.neuron.mats[i]
  *         spike_times = deref(mat).get_spike_times()
  *         deref(mat).reset_spike_times()             # <<<<<<<<<<<<<<
@@ -9984,20 +10126,20 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  */
     (*__pyx_v_mat).reset_spike_times();
 
-    /* "matsim/matsim.pyx":402
+    /* "matsim/matsim.pyx":407
  *         spike_times = deref(mat).get_spike_times()
  *         deref(mat).reset_spike_times()
  *         spike_trains[name] = np.array([t for t in spike_times])             # <<<<<<<<<<<<<<
  * 
  *     return spike_trains
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_np); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 402, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_np); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 407, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_array); if (unlikely(!__pyx_t_12)) __PYX_ERR(1, 402, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_array); if (unlikely(!__pyx_t_12)) __PYX_ERR(1, 407, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     { /* enter inner scope */
-      __pyx_t_11 = PyList_New(0); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 402, __pyx_L1_error)
+      __pyx_t_11 = PyList_New(0); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 407, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __pyx_t_13 = __pyx_v_spike_times.begin();
       for (;;) {
@@ -10005,9 +10147,9 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
         __pyx_t_6 = *__pyx_t_13;
         ++__pyx_t_13;
         __pyx_9genexpr12__pyx_v_t = __pyx_t_6;
-        __pyx_t_14 = PyFloat_FromDouble(__pyx_9genexpr12__pyx_v_t); if (unlikely(!__pyx_t_14)) __PYX_ERR(1, 402, __pyx_L1_error)
+        __pyx_t_14 = PyFloat_FromDouble(__pyx_9genexpr12__pyx_v_t); if (unlikely(!__pyx_t_14)) __PYX_ERR(1, 407, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_11, (PyObject*)__pyx_t_14))) __PYX_ERR(1, 402, __pyx_L1_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_11, (PyObject*)__pyx_t_14))) __PYX_ERR(1, 407, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       }
     } /* exit inner scope */
@@ -10024,13 +10166,13 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
     __pyx_t_9 = (__pyx_t_14) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_14, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_11);
     __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 402, __pyx_L1_error)
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 407, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (unlikely(PyDict_SetItem(__pyx_v_spike_trains, __pyx_v_name, __pyx_t_9) < 0)) __PYX_ERR(1, 402, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_spike_trains, __pyx_v_name, __pyx_t_9) < 0)) __PYX_ERR(1, 407, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "matsim/matsim.pyx":398
+    /* "matsim/matsim.pyx":403
  *         tot_time += dt
  * 
  *     for i, name in enumerate(mat_names):             # <<<<<<<<<<<<<<
@@ -10041,7 +10183,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":404
+  /* "matsim/matsim.pyx":409
  *         spike_trains[name] = np.array([t for t in spike_times])
  * 
  *     return spike_trains             # <<<<<<<<<<<<<<
@@ -10051,7 +10193,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
   __pyx_r = __pyx_v_spike_trains;
   goto __pyx_L0;
 
-  /* "matsim/matsim.pyx":380
+  /* "matsim/matsim.pyx":385
  *     return result_dict
  * 
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):             # <<<<<<<<<<<<<<
@@ -11229,7 +11371,7 @@ static int __pyx_setprop_6matsim_6matsim_8MCNeuron_time(PyObject *o, PyObject *v
 }
 
 static PyMethodDef __pyx_methods_6matsim_6matsim_MCNeuron[] = {
-  {"append_conductance", (PyCFunction)__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance, METH_O, 0},
+  {"append_conductance", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6matsim_6matsim_8MCNeuron_3append_conductance, METH_VARARGS|METH_KEYWORDS, 0},
   {"timestep", (PyCFunction)__pyx_pw_6matsim_6matsim_8MCNeuron_5timestep, METH_O, 0},
   {"copy", (PyCFunction)__pyx_pw_6matsim_6matsim_8MCNeuron_7copy, METH_NOARGS, 0},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_6matsim_6matsim_8MCNeuron_9__reduce_cython__, METH_NOARGS, 0},
@@ -11552,10 +11694,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cinit, __pyx_k_cinit, sizeof(__pyx_k_cinit), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_columns, __pyx_k_columns, sizeof(__pyx_k_columns), 0, 0, 1, 1},
+  {&__pyx_n_s_compartment, __pyx_k_compartment, sizeof(__pyx_k_compartment), 0, 0, 1, 1},
+  {&__pyx_n_s_cond, __pyx_k_cond, sizeof(__pyx_k_cond), 0, 0, 1, 1},
   {&__pyx_n_s_conductance, __pyx_k_conductance, sizeof(__pyx_k_conductance), 0, 0, 1, 1},
   {&__pyx_n_s_copy, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
   {&__pyx_n_s_coupling_conductance, __pyx_k_coupling_conductance, sizeof(__pyx_k_coupling_conductance), 0, 0, 1, 1},
   {&__pyx_n_s_decay, __pyx_k_decay, sizeof(__pyx_k_decay), 0, 0, 1, 1},
+  {&__pyx_n_u_dendrite, __pyx_k_dendrite, sizeof(__pyx_k_dendrite), 0, 1, 0, 1},
   {&__pyx_n_s_dt, __pyx_k_dt, sizeof(__pyx_k_dt), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
@@ -11596,6 +11741,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_p, __pyx_k_p, sizeof(__pyx_k_p), 0, 0, 1, 1},
   {&__pyx_n_s_pandas, __pyx_k_pandas, sizeof(__pyx_k_pandas), 0, 0, 1, 1},
   {&__pyx_n_s_pd, __pyx_k_pd, sizeof(__pyx_k_pd), 0, 0, 1, 1},
+  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_rate, __pyx_k_rate, sizeof(__pyx_k_rate), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
@@ -11616,6 +11762,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_set_g, __pyx_k_set_g, sizeof(__pyx_k_set_g), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {&__pyx_n_u_soma, __pyx_k_soma, sizeof(__pyx_k_soma), 0, 1, 0, 1},
   {&__pyx_n_s_spike_times, __pyx_k_spike_times, sizeof(__pyx_k_spike_times), 0, 0, 1, 1},
   {&__pyx_n_s_spike_trains, __pyx_k_spike_trains, sizeof(__pyx_k_spike_trains), 0, 0, 1, 1},
   {&__pyx_n_s_sr_experiment, __pyx_k_sr_experiment, sizeof(__pyx_k_sr_experiment), 0, 0, 1, 1},
@@ -11635,6 +11782,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_timestep, __pyx_k_timestep, sizeof(__pyx_k_timestep), 0, 0, 1, 1},
   {&__pyx_n_s_tot_time, __pyx_k_tot_time, sizeof(__pyx_k_tot_time), 0, 0, 1, 1},
   {&__pyx_n_s_tw, __pyx_k_tw, sizeof(__pyx_k_tw), 0, 0, 1, 1},
+  {&__pyx_kp_u_unrecognised_compartment, __pyx_k_unrecognised_compartment, sizeof(__pyx_k_unrecognised_compartment), 0, 1, 0, 0},
   {&__pyx_kp_u_utf_8, __pyx_k_utf_8, sizeof(__pyx_k_utf_8), 0, 1, 0, 0},
   {&__pyx_n_s_voltage, __pyx_k_voltage, sizeof(__pyx_k_voltage), 0, 0, 1, 1},
   {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
@@ -11642,8 +11790,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(1, 365, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 398, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(1, 252, __pyx_L1_error)
+  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(1, 370, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 403, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -11778,24 +11927,35 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "(tree fragment)":2
- * def __reduce_cython__(self):
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
- * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+  /* "matsim/matsim.pyx":252
+ *             self.neuron.conductances_dendrite.push_back(cond.conductance)
+ *         else:
+ *             print('unrecognised compartment')             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef void timestep(self, double dt):
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_unrecognised_compartment); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -11803,54 +11963,54 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "matsim/matsim.pyx":333
+  /* "matsim/matsim.pyx":338
  *         self.neuron.time = time
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,             # <<<<<<<<<<<<<<
  *         intensities, intensity_freq_func, int seed):
  *     exc_intensities, inh_intensities = np.array([
  */
-  __pyx_tuple__18 = PyTuple_Pack(17, __pyx_n_s_neuron, __pyx_n_s_time_window, __pyx_n_s_dt, __pyx_n_s_intensities, __pyx_n_s_intensity_freq_func, __pyx_n_s_seed, __pyx_n_s_exc_intensities, __pyx_n_s_inh_intensities, __pyx_n_s_c_neuron, __pyx_n_s_c_exc, __pyx_n_s_c_inh, __pyx_n_s_results, __pyx_n_s_mat_names, __pyx_n_s_result_array, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_x); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 333, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(6, 0, 17, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_sr_experiment, 333, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(1, 333, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(17, __pyx_n_s_neuron, __pyx_n_s_time_window, __pyx_n_s_dt, __pyx_n_s_intensities, __pyx_n_s_intensity_freq_func, __pyx_n_s_seed, __pyx_n_s_exc_intensities, __pyx_n_s_inh_intensities, __pyx_n_s_c_neuron, __pyx_n_s_c_exc, __pyx_n_s_c_inh, __pyx_n_s_results, __pyx_n_s_mat_names, __pyx_n_s_result_array, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_x); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 338, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(6, 0, 17, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_sr_experiment, 338, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(1, 338, __pyx_L1_error)
 
-  /* "matsim/matsim.pyx":352
+  /* "matsim/matsim.pyx":357
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):             # <<<<<<<<<<<<<<
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  */
-  __pyx_tuple__20 = PyTuple_Pack(22, __pyx_n_s_neuron, __pyx_n_s_time_windows, __pyx_n_s_dt, __pyx_n_s_intensities, __pyx_n_s_intensity_freq_func, __pyx_n_s_seed, __pyx_n_s_exc_intensities, __pyx_n_s_inh_intensities, __pyx_n_s_c_neuron, __pyx_n_s_c_exc, __pyx_n_s_c_inh, __pyx_n_s_results, __pyx_n_s_st, __pyx_n_s_mat_names, __pyx_n_s_result_python, __pyx_n_s_result_dict, __pyx_n_s_tw, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_spike_times, __pyx_n_s_st, __pyx_n_s_x); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 352, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(6, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_sr_experiment, 352, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(1, 352, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(22, __pyx_n_s_neuron, __pyx_n_s_time_windows, __pyx_n_s_dt, __pyx_n_s_intensities, __pyx_n_s_intensity_freq_func, __pyx_n_s_seed, __pyx_n_s_exc_intensities, __pyx_n_s_inh_intensities, __pyx_n_s_c_neuron, __pyx_n_s_c_exc, __pyx_n_s_c_inh, __pyx_n_s_results, __pyx_n_s_st, __pyx_n_s_mat_names, __pyx_n_s_result_python, __pyx_n_s_result_dict, __pyx_n_s_tw, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_spike_times, __pyx_n_s_st, __pyx_n_s_x); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 357, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(6, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_sr_experiment, 357, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(1, 357, __pyx_L1_error)
 
-  /* "matsim/matsim.pyx":380
+  /* "matsim/matsim.pyx":385
  *     return result_dict
  * 
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):             # <<<<<<<<<<<<<<
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
  *     spike_trains = {}
  */
-  __pyx_tuple__22 = PyTuple_Pack(15, __pyx_n_s_neuron, __pyx_n_s_time, __pyx_n_s_dt, __pyx_n_s_exc, __pyx_n_s_inh, __pyx_n_s_mat_names, __pyx_n_s_spike_trains, __pyx_n_s_spike_times, __pyx_n_s_mat, __pyx_n_s_conductance, __pyx_n_s_tot_time, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_name, __pyx_n_s_t); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 380, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(5, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_steady_spike_train, 380, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(1, 380, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(15, __pyx_n_s_neuron, __pyx_n_s_time, __pyx_n_s_dt, __pyx_n_s_exc, __pyx_n_s_inh, __pyx_n_s_mat_names, __pyx_n_s_spike_trains, __pyx_n_s_spike_times, __pyx_n_s_mat, __pyx_n_s_conductance, __pyx_n_s_tot_time, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_name, __pyx_n_s_t); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(5, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_steady_spike_train, 385, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(1, 385, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -11992,16 +12152,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_ptype_6matsim_6matsim_MCNeuron = &__pyx_type_6matsim_6matsim_MCNeuron;
   __pyx_vtabptr_6matsim_6matsim_HHNeuron = &__pyx_vtable_6matsim_6matsim_HHNeuron;
   __pyx_vtable_6matsim_6matsim_HHNeuron.timestep = (void (*)(struct __pyx_obj_6matsim_6matsim_HHNeuron *, double, int __pyx_skip_dispatch))__pyx_f_6matsim_6matsim_8HHNeuron_timestep;
-  if (PyType_Ready(&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 271, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 276, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_6matsim_6matsim_HHNeuron.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_6matsim_6matsim_HHNeuron.tp_dictoffset && __pyx_type_6matsim_6matsim_HHNeuron.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_6matsim_6matsim_HHNeuron.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_6matsim_6matsim_HHNeuron.tp_dict, __pyx_vtabptr_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 271, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_HHNeuron, (PyObject *)&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 271, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 271, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_6matsim_6matsim_HHNeuron.tp_dict, __pyx_vtabptr_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 276, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_HHNeuron, (PyObject *)&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 276, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6matsim_6matsim_HHNeuron) < 0) __PYX_ERR(1, 276, __pyx_L1_error)
   __pyx_ptype_6matsim_6matsim_HHNeuron = &__pyx_type_6matsim_6matsim_HHNeuron;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -12255,40 +12415,40 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pd, __pyx_t_1) < 0) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":333
+  /* "matsim/matsim.pyx":338
  *         self.neuron.time = time
  * 
  * def sr_experiment(Neuron neuron, double time_window, double dt,             # <<<<<<<<<<<<<<
  *         intensities, intensity_freq_func, int seed):
  *     exc_intensities, inh_intensities = np.array([
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_1sr_experiment, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 333, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_1sr_experiment, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sr_experiment, __pyx_t_1) < 0) __PYX_ERR(1, 333, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sr_experiment, __pyx_t_1) < 0) __PYX_ERR(1, 338, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":352
+  /* "matsim/matsim.pyx":357
  *             groupby(level=0).agg(lambda x: list(x)).stack().swaplevel()
  * 
  * def sr_experiment(Neuron neuron, time_windows, dt, intensities, intensity_freq_func, seed):             # <<<<<<<<<<<<<<
  *     exc_intensities, inh_intensities = np.array([
  *         np.array(intensity_freq_func(i))
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_3sr_experiment, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 352, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_3sr_experiment, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sr_experiment, __pyx_t_1) < 0) __PYX_ERR(1, 352, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sr_experiment, __pyx_t_1) < 0) __PYX_ERR(1, 357, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "matsim/matsim.pyx":380
+  /* "matsim/matsim.pyx":385
  *     return result_dict
  * 
  * def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):             # <<<<<<<<<<<<<<
  *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
  *     spike_trains = {}
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_5steady_spike_train, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 380, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_5steady_spike_train, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 385, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_steady_spike_train, __pyx_t_1) < 0) __PYX_ERR(1, 380, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_steady_spike_train, __pyx_t_1) < 0) __PYX_ERR(1, 385, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "matsim/matsim.pyx":1
@@ -13240,6 +13400,155 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
     return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
+
+/* BytesEquals */
+static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+    if (s1 == s2) {
+        return (equals == Py_EQ);
+    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
+        const char *ps1, *ps2;
+        Py_ssize_t length = PyBytes_GET_SIZE(s1);
+        if (length != PyBytes_GET_SIZE(s2))
+            return (equals == Py_NE);
+        ps1 = PyBytes_AS_STRING(s1);
+        ps2 = PyBytes_AS_STRING(s2);
+        if (ps1[0] != ps2[0]) {
+            return (equals == Py_NE);
+        } else if (length == 1) {
+            return (equals == Py_EQ);
+        } else {
+            int result;
+#if CYTHON_USE_UNICODE_INTERNALS
+            Py_hash_t hash1, hash2;
+            hash1 = ((PyBytesObject*)s1)->ob_shash;
+            hash2 = ((PyBytesObject*)s2)->ob_shash;
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                return (equals == Py_NE);
+            }
+#endif
+            result = memcmp(ps1, ps2, (size_t)length);
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
+        return (equals == Py_NE);
+    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
+        return (equals == Py_NE);
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+#endif
+}
+
+/* UnicodeEquals */
+static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+#if PY_MAJOR_VERSION < 3
+    PyObject* owned_ref = NULL;
+#endif
+    int s1_is_unicode, s2_is_unicode;
+    if (s1 == s2) {
+        goto return_eq;
+    }
+    s1_is_unicode = PyUnicode_CheckExact(s1);
+    s2_is_unicode = PyUnicode_CheckExact(s2);
+#if PY_MAJOR_VERSION < 3
+    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
+        owned_ref = PyUnicode_FromObject(s2);
+        if (unlikely(!owned_ref))
+            return -1;
+        s2 = owned_ref;
+        s2_is_unicode = 1;
+    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
+        owned_ref = PyUnicode_FromObject(s1);
+        if (unlikely(!owned_ref))
+            return -1;
+        s1 = owned_ref;
+        s1_is_unicode = 1;
+    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
+        return __Pyx_PyBytes_Equals(s1, s2, equals);
+    }
+#endif
+    if (s1_is_unicode & s2_is_unicode) {
+        Py_ssize_t length;
+        int kind;
+        void *data1, *data2;
+        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
+            return -1;
+        length = __Pyx_PyUnicode_GET_LENGTH(s1);
+        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
+            goto return_ne;
+        }
+#if CYTHON_USE_UNICODE_INTERNALS
+        {
+            Py_hash_t hash1, hash2;
+        #if CYTHON_PEP393_ENABLED
+            hash1 = ((PyASCIIObject*)s1)->hash;
+            hash2 = ((PyASCIIObject*)s2)->hash;
+        #else
+            hash1 = ((PyUnicodeObject*)s1)->hash;
+            hash2 = ((PyUnicodeObject*)s2)->hash;
+        #endif
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                goto return_ne;
+            }
+        }
+#endif
+        kind = __Pyx_PyUnicode_KIND(s1);
+        if (kind != __Pyx_PyUnicode_KIND(s2)) {
+            goto return_ne;
+        }
+        data1 = __Pyx_PyUnicode_DATA(s1);
+        data2 = __Pyx_PyUnicode_DATA(s2);
+        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
+            goto return_ne;
+        } else if (length == 1) {
+            goto return_eq;
+        } else {
+            int result = memcmp(data1, data2, (size_t)(length * kind));
+            #if PY_MAJOR_VERSION < 3
+            Py_XDECREF(owned_ref);
+            #endif
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & s2_is_unicode) {
+        goto return_ne;
+    } else if ((s2 == Py_None) & s1_is_unicode) {
+        goto return_ne;
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        #if PY_MAJOR_VERSION < 3
+        Py_XDECREF(owned_ref);
+        #endif
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+return_eq:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_EQ);
+return_ne:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_NE);
+#endif
+}
 
 /* RaiseTooManyValuesToUnpack */
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
