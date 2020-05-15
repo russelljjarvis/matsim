@@ -232,6 +232,73 @@ void Neuron::timestep(double dt) {
 	}
 }
 
+MCNeuron::MCNeuron() {}
+
+MCNeuron::MCNeuron(double resting_potential, double membrane_resistance, double membrane_capacitance, vector<MATThresholds*> mats,
+               double reset_potential, double coupling_conductance) {
+	this->resting_potential = resting_potential;
+	this->membrane_resistance = membrane_resistance;
+	this->membrane_capacitance = membrane_capacitance;
+	this->mats = mats;
+    this->reset_potential = reset_potential;
+    this->leaky_conductance = 1 / membrane_resistance;
+    this->coupling_conductance = coupling_conductance;
+
+	voltageSoma = resting_potential;
+	voltageDendrite = resting_potential;
+	time_constant = membrane_capacitance * membrane_resistance;
+	time = 0;
+}
+
+void MCNeuron::append_conductance(Conductance* conductance) {
+	conductances.push_back(conductance);
+}
+
+void MCNeuron::integrate_voltage(double dt) {
+	double tot_conductance = 0;
+	double tot_gr = 0;
+	double factor, v_barS, v_barD, tauS, tauD;
+
+	v_barS = (leaky_conductance * resting_potential + coupling_conductance * voltageDendrite) / (leaky_conductance + coupling_conductance);
+	tauS = membrane_capacitance / (leaky_conductance + coupling_conductance);
+
+	for (auto c : conductances) {
+		tot_conductance += c->get_g();
+		tot_gr += c->get_g() * c->get_reversal();
+	}
+
+	v_barD = (leaky_conductance * resting_potential + coupling_conductance * voltageSoma + tot_gr) / (leaky_conductance + coupling_conductance + tot_conductance);
+	tauD = membrane_capacitance / (leaky_conductance + coupling_conductance + tot_conductance);
+
+	voltageSoma = v_barS + (voltageSoma - v_barS) * exp(-dt / tauS);
+	voltageDendrite = v_barD + (voltageDendrite - v_barD) * exp(-dt / tauD);
+}
+
+void MCNeuron::timestep(double dt) {
+	time += dt;
+
+	for (auto c : conductances) {
+		c->update(dt);
+	}
+
+	this->integrate_voltage(dt);
+
+	for (auto mat : mats) {
+		mat->update(dt);
+		if (mat->threshold <= voltageSoma) {
+			mat->fire(time);
+			
+			if (mat->resetting == true) {
+				this->voltageSoma = this->reset_potential;
+			}
+
+			for (auto c : conductances) {
+				c->activate();
+			}
+		}
+	}
+}
+
 HHNeuron::HHNeuron() {}
 
 HHNeuron::HHNeuron(double adaptation, double VS, double Ah,

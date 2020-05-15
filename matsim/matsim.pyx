@@ -10,6 +10,7 @@ from .matsim_cth cimport OUConductance as COUConductance
 from .matsim_cth cimport Conductance as CConductance
 from .matsim_cth cimport MATThresholds as CMATThresholds
 from .matsim_cth cimport Neuron as CNeuron
+from .matsim_cth cimport MCNeuron as CMCNeuron
 from .matsim_cth cimport HHNeuron as CHHNeuron
 from .matsim_cth cimport sr_experiment as _sr_experiment
 from .matsim_cth cimport sr_experiment_spike_times as _sr_experiment_spike_times
@@ -201,6 +202,63 @@ cdef class Neuron:
     @property
     def voltage(self):
         return self.neuron.voltage
+
+    @property
+    def time(self):
+        return self.neuron.time
+    @time.setter
+    def time(self, time):
+        self.neuron.time = time
+
+
+cdef class MCNeuron:
+    cdef CMCNeuron neuron
+    cdef vector[string] mat_names
+    cdef double resting_potential, membrane_resistance, membrane_capacitance, reset_potential, coupling_conductance
+    cdef object thresholds
+
+    def __cinit__(self, double resting_potential, double membrane_resistance,
+        double membrane_capacitance, mats, reset_potential=None, coupling_conductance=0):
+        # cdef MATThresholds* c_mat
+        cdef MATThresholds mat
+        cdef vector[CMATThresholds*] mat_vec
+
+        self.resting_potential = resting_potential
+        self.membrane_resistance = membrane_resistance
+        self.membrane_capacitance = membrane_capacitance
+        self.coupling_conductance = coupling_conductance
+        self.thresholds = []
+        
+        if reset_potential is None:
+            reset_potential = resting_potential
+        
+        self.reset_potential = reset_potential
+
+        for mat in mats:
+            self.thresholds.append(mat)
+
+            mat_vec.push_back(mat.mat)
+            self.mat_names.push_back(mat.name)
+
+        self.neuron = CMCNeuron(resting_potential, membrane_resistance, membrane_capacitance, mat_vec, reset_potential, coupling_conductance)
+        # self.mats = mats
+
+    def append_conductance(self, Conductance cond):
+        self.neuron.conductances.push_back(cond.conductance)
+
+    cpdef void timestep(self, double dt):
+        self.neuron.timestep(dt)
+
+    def copy(self):
+        new_mats = [mat.copy() for mat in self.thresholds]
+        new_neuron = MCNeuron(self.resting_potential, self.membrane_resistance, self.membrane_capacitance,
+            self.thresholds, self.reset_potential, self.coupling_conductance)
+        return new_neuron
+
+    # Attribute access
+    @property
+    def voltage(self):
+        return np.array([self.neuron.voltageSoma, self.neuron.voltageDendrite])
 
     @property
     def time(self):

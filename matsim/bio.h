@@ -86,6 +86,21 @@ class Neuron {
 		double voltage, time;
 };
 
+class MCNeuron {
+	double resting_potential, membrane_resistance, leaky_conductance, membrane_capacitance, time_constant, reset_potential;
+	double coupling_conductance;
+
+	public:
+		MCNeuron();
+		MCNeuron(double, double, double, vector<MATThresholds*>, double, double);
+		void append_conductance(Conductance*);
+		void integrate_voltage(double);
+		void timestep(double);
+		vector<Conductance*> conductances;
+		vector<MATThresholds*> mats;
+		double voltageSoma, voltageDendrite, time;
+};
+
 class HHNeuron {
 	double g_l, E_l, c_m, E_na, g_na, E_k, g_k, g_m, VS, Ah;
 
