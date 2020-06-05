@@ -279,7 +279,7 @@ void MCNeuron::integrate_voltage(double dt) {
 		tot_gr_dendrite += c->get_g() * c->get_reversal();
 	}
 
-	v_barD = (leaky_conductance * resting_potential + coupling_conductance * voltageSoma + tot_gr_dendrite) / (leaky_conductance + coupling_conductance + tot_gr_dendrite);
+	v_barD = (leaky_conductance * resting_potential + coupling_conductance * voltageSoma + tot_gr_dendrite) / (leaky_conductance + coupling_conductance + tot_conductance_dendrite);
 	tauD = membrane_capacitance / (leaky_conductance + coupling_conductance + tot_conductance_dendrite);
 
 	voltageSoma = v_barS + (voltageSoma - v_barS) * exp(-dt / tauS);
