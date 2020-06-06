@@ -1704,6 +1704,7 @@ static const char __pyx_k_membrane_resistance[] = "membrane_resistance";
 static const char __pyx_k_ShotNoiseConductance[] = "ShotNoiseConductance";
 static const char __pyx_k_coupling_conductance[] = "coupling_conductance";
 static const char __pyx_k_membrane_capacitance[] = "membrane_capacitance";
+static const char __pyx_k_steady_spike_train_mc[] = "steady_spike_train_mc";
 static const char __pyx_k_ExponentialConductance[] = "ExponentialConductance";
 static const char __pyx_k_unrecognised_compartment[] = "unrecognised compartment";
 static const char __pyx_k_sr_experiment_locals_lambda[] = "sr_experiment.<locals>.<lambda>";
@@ -1811,6 +1812,7 @@ static PyObject *__pyx_n_s_sr_experiment_locals_lambda;
 static PyObject *__pyx_n_s_st;
 static PyObject *__pyx_n_s_stack;
 static PyObject *__pyx_n_s_steady_spike_train;
+static PyObject *__pyx_n_s_steady_spike_train_mc;
 static PyObject *__pyx_n_s_sum;
 static PyObject *__pyx_n_s_swaplevel;
 static PyObject *__pyx_n_s_t;
@@ -1896,6 +1898,7 @@ static PyObject *__pyx_pf_6matsim_6matsim_sr_experiment(CYTHON_UNUSED PyObject *
 static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_2sr_experiment(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6matsim_6matsim_Neuron *__pyx_v_neuron, PyObject *__pyx_v_time_windows, PyObject *__pyx_v_dt, PyObject *__pyx_v_intensities, PyObject *__pyx_v_intensity_freq_func, PyObject *__pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6matsim_6matsim_Neuron *__pyx_v_neuron, double __pyx_v_time, double __pyx_v_dt, PyObject *__pyx_v_exc, PyObject *__pyx_v_inh); /* proto */
+static PyObject *__pyx_pf_6matsim_6matsim_6steady_spike_train_mc(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_neuron, double __pyx_v_time, double __pyx_v_dt); /* proto */
 static PyObject *__pyx_tp_new_6matsim_6matsim_Conductance(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6matsim_6matsim_ExponentialConductance(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6matsim_6matsim_ShotNoiseConductance(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1935,9 +1938,11 @@ static PyObject *__pyx_tuple__18;
 static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__23;
+static PyObject *__pyx_tuple__25;
 static PyObject *__pyx_codeobj__20;
 static PyObject *__pyx_codeobj__22;
 static PyObject *__pyx_codeobj__24;
+static PyObject *__pyx_codeobj__26;
 /* Late includes */
 
 /* "matsim/matsim.pyx":28
@@ -10187,6 +10192,8 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
  *         spike_trains[name] = np.array([t for t in spike_times])
  * 
  *     return spike_trains             # <<<<<<<<<<<<<<
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_spike_trains);
@@ -10210,6 +10217,348 @@ static PyObject *__pyx_pf_6matsim_6matsim_4steady_spike_train(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_14);
   __Pyx_AddTraceback("matsim.matsim.steady_spike_train", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_mat_names);
+  __Pyx_XDECREF(__pyx_v_spike_trains);
+  __Pyx_XDECREF(__pyx_v_i);
+  __Pyx_XDECREF(__pyx_v_name);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "matsim/matsim.pyx":411
+ *     return spike_trains
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):             # <<<<<<<<<<<<<<
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+ *     spike_trains = {}
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6matsim_6matsim_7steady_spike_train_mc(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6matsim_6matsim_7steady_spike_train_mc = {"steady_spike_train_mc", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6matsim_6matsim_7steady_spike_train_mc, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6matsim_6matsim_7steady_spike_train_mc(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_neuron = 0;
+  double __pyx_v_time;
+  double __pyx_v_dt;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("steady_spike_train_mc (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_neuron,&__pyx_n_s_time,&__pyx_n_s_dt,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_neuron)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_time)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train_mc", 1, 3, 3, 1); __PYX_ERR(1, 411, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dt)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("steady_spike_train_mc", 1, 3, 3, 2); __PYX_ERR(1, 411, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "steady_spike_train_mc") < 0)) __PYX_ERR(1, 411, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_neuron = ((struct __pyx_obj_6matsim_6matsim_MCNeuron *)values[0]);
+    __pyx_v_time = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_time == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 411, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 411, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("steady_spike_train_mc", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 411, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("matsim.matsim.steady_spike_train_mc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neuron), __pyx_ptype_6matsim_6matsim_MCNeuron, 1, "neuron", 0))) __PYX_ERR(1, 411, __pyx_L1_error)
+  __pyx_r = __pyx_pf_6matsim_6matsim_6steady_spike_train_mc(__pyx_self, __pyx_v_neuron, __pyx_v_time, __pyx_v_dt);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6matsim_6matsim_6steady_spike_train_mc(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6matsim_6matsim_MCNeuron *__pyx_v_neuron, double __pyx_v_time, double __pyx_v_dt) {
+  PyObject *__pyx_v_mat_names = NULL;
+  PyObject *__pyx_v_spike_trains = NULL;
+  std::vector<double>  __pyx_v_spike_times;
+  MATThresholds *__pyx_v_mat;
+  double __pyx_v_tot_time;
+  PyObject *__pyx_v_i = NULL;
+  PyObject *__pyx_v_name = NULL;
+  std::string __pyx_9genexpr13__pyx_v_name;
+  double __pyx_9genexpr14__pyx_v_t;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  std::vector<std::string> ::iterator __pyx_t_2;
+  std::vector<std::string>  *__pyx_t_3;
+  std::string __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  std::vector<MATThresholds *> ::size_type __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  std::vector<double> ::iterator __pyx_t_12;
+  double __pyx_t_13;
+  PyObject *__pyx_t_14 = NULL;
+  __Pyx_RefNannySetupContext("steady_spike_train_mc", 0);
+
+  /* "matsim/matsim.pyx":412
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]             # <<<<<<<<<<<<<<
+ *     spike_trains = {}
+ *     cdef vector[double] spike_times
+ */
+  { /* enter inner scope */
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 412, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = &__pyx_v_neuron->mat_names;
+    __pyx_t_2 = __pyx_t_3->begin();
+    for (;;) {
+      if (!(__pyx_t_2 != __pyx_t_3->end())) break;
+      __pyx_t_4 = *__pyx_t_2;
+      ++__pyx_t_2;
+      __pyx_9genexpr13__pyx_v_name = __pyx_t_4;
+      __pyx_t_5 = __Pyx_decode_cpp_string(__pyx_9genexpr13__pyx_v_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 412, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(1, 412, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    }
+  } /* exit inner scope */
+  __pyx_v_mat_names = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "matsim/matsim.pyx":413
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+ *     spike_trains = {}             # <<<<<<<<<<<<<<
+ *     cdef vector[double] spike_times
+ *     cdef CMATThresholds* mat
+ */
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 413, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_spike_trains = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "matsim/matsim.pyx":417
+ *     cdef CMATThresholds* mat
+ * 
+ *     cdef double tot_time = 0             # <<<<<<<<<<<<<<
+ *     while tot_time < time:
+ *         neuron.timestep(dt)
+ */
+  __pyx_v_tot_time = 0.0;
+
+  /* "matsim/matsim.pyx":418
+ * 
+ *     cdef double tot_time = 0
+ *     while tot_time < time:             # <<<<<<<<<<<<<<
+ *         neuron.timestep(dt)
+ *         tot_time += dt
+ */
+  while (1) {
+    __pyx_t_6 = ((__pyx_v_tot_time < __pyx_v_time) != 0);
+    if (!__pyx_t_6) break;
+
+    /* "matsim/matsim.pyx":419
+ *     cdef double tot_time = 0
+ *     while tot_time < time:
+ *         neuron.timestep(dt)             # <<<<<<<<<<<<<<
+ *         tot_time += dt
+ * 
+ */
+    ((struct __pyx_vtabstruct_6matsim_6matsim_MCNeuron *)__pyx_v_neuron->__pyx_vtab)->timestep(__pyx_v_neuron, __pyx_v_dt, 0);
+
+    /* "matsim/matsim.pyx":420
+ *     while tot_time < time:
+ *         neuron.timestep(dt)
+ *         tot_time += dt             # <<<<<<<<<<<<<<
+ * 
+ *     for i, name in enumerate(mat_names):
+ */
+    __pyx_v_tot_time = (__pyx_v_tot_time + __pyx_v_dt);
+  }
+
+  /* "matsim/matsim.pyx":422
+ *         tot_time += dt
+ * 
+ *     for i, name in enumerate(mat_names):             # <<<<<<<<<<<<<<
+ *         mat = neuron.neuron.mats[i]
+ *         spike_times = deref(mat).get_spike_times()
+ */
+  __Pyx_INCREF(__pyx_int_0);
+  __pyx_t_1 = __pyx_int_0;
+  __pyx_t_5 = __pyx_v_mat_names; __Pyx_INCREF(__pyx_t_5); __pyx_t_7 = 0;
+  for (;;) {
+    if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_5)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_8 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_7); __Pyx_INCREF(__pyx_t_8); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(1, 422, __pyx_L1_error)
+    #else
+    __pyx_t_8 = PySequence_ITEM(__pyx_t_5, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 422, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    #endif
+    __Pyx_XDECREF_SET(__pyx_v_name, __pyx_t_8);
+    __pyx_t_8 = 0;
+    __Pyx_INCREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
+    __pyx_t_8 = __Pyx_PyInt_AddObjC(__pyx_t_1, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 422, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_1);
+    __pyx_t_1 = __pyx_t_8;
+    __pyx_t_8 = 0;
+
+    /* "matsim/matsim.pyx":423
+ * 
+ *     for i, name in enumerate(mat_names):
+ *         mat = neuron.neuron.mats[i]             # <<<<<<<<<<<<<<
+ *         spike_times = deref(mat).get_spike_times()
+ *         deref(mat).reset_spike_times()
+ */
+    __pyx_t_9 = __Pyx_PyInt_As_size_t(__pyx_v_i); if (unlikely((__pyx_t_9 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(1, 423, __pyx_L1_error)
+    __pyx_v_mat = (__pyx_v_neuron->neuron.mats[__pyx_t_9]);
+
+    /* "matsim/matsim.pyx":424
+ *     for i, name in enumerate(mat_names):
+ *         mat = neuron.neuron.mats[i]
+ *         spike_times = deref(mat).get_spike_times()             # <<<<<<<<<<<<<<
+ *         deref(mat).reset_spike_times()
+ *         spike_trains[name] = np.array([t for t in spike_times])
+ */
+    __pyx_v_spike_times = (*__pyx_v_mat).get_spike_times();
+
+    /* "matsim/matsim.pyx":425
+ *         mat = neuron.neuron.mats[i]
+ *         spike_times = deref(mat).get_spike_times()
+ *         deref(mat).reset_spike_times()             # <<<<<<<<<<<<<<
+ *         spike_trains[name] = np.array([t for t in spike_times])
+ * 
+ */
+    (*__pyx_v_mat).reset_spike_times();
+
+    /* "matsim/matsim.pyx":426
+ *         spike_times = deref(mat).get_spike_times()
+ *         deref(mat).reset_spike_times()
+ *         spike_trains[name] = np.array([t for t in spike_times])             # <<<<<<<<<<<<<<
+ * 
+ *     return spike_trains
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_np); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 426, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_array); if (unlikely(!__pyx_t_11)) __PYX_ERR(1, 426, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    { /* enter inner scope */
+      __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 426, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_12 = __pyx_v_spike_times.begin();
+      for (;;) {
+        if (!(__pyx_t_12 != __pyx_v_spike_times.end())) break;
+        __pyx_t_13 = *__pyx_t_12;
+        ++__pyx_t_12;
+        __pyx_9genexpr14__pyx_v_t = __pyx_t_13;
+        __pyx_t_14 = PyFloat_FromDouble(__pyx_9genexpr14__pyx_v_t); if (unlikely(!__pyx_t_14)) __PYX_ERR(1, 426, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_14);
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_10, (PyObject*)__pyx_t_14))) __PYX_ERR(1, 426, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+      }
+    } /* exit inner scope */
+    __pyx_t_14 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_11))) {
+      __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_11);
+      if (likely(__pyx_t_14)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+        __Pyx_INCREF(__pyx_t_14);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_11, function);
+      }
+    }
+    __pyx_t_8 = (__pyx_t_14) ? __Pyx_PyObject_Call2Args(__pyx_t_11, __pyx_t_14, __pyx_t_10) : __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10);
+    __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 426, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    if (unlikely(PyDict_SetItem(__pyx_v_spike_trains, __pyx_v_name, __pyx_t_8) < 0)) __PYX_ERR(1, 426, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+    /* "matsim/matsim.pyx":422
+ *         tot_time += dt
+ * 
+ *     for i, name in enumerate(mat_names):             # <<<<<<<<<<<<<<
+ *         mat = neuron.neuron.mats[i]
+ *         spike_times = deref(mat).get_spike_times()
+ */
+  }
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "matsim/matsim.pyx":428
+ *         spike_trains[name] = np.array([t for t in spike_times])
+ * 
+ *     return spike_trains             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_spike_trains);
+  __pyx_r = __pyx_v_spike_trains;
+  goto __pyx_L0;
+
+  /* "matsim/matsim.pyx":411
+ *     return spike_trains
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):             # <<<<<<<<<<<<<<
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+ *     spike_trains = {}
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_14);
+  __Pyx_AddTraceback("matsim.matsim.steady_spike_train_mc", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_mat_names);
@@ -11770,6 +12119,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_st, __pyx_k_st, sizeof(__pyx_k_st), 0, 0, 1, 1},
   {&__pyx_n_s_stack, __pyx_k_stack, sizeof(__pyx_k_stack), 0, 0, 1, 1},
   {&__pyx_n_s_steady_spike_train, __pyx_k_steady_spike_train, sizeof(__pyx_k_steady_spike_train), 0, 0, 1, 1},
+  {&__pyx_n_s_steady_spike_train_mc, __pyx_k_steady_spike_train_mc, sizeof(__pyx_k_steady_spike_train_mc), 0, 0, 1, 1},
   {&__pyx_n_s_sum, __pyx_k_sum, sizeof(__pyx_k_sum), 0, 0, 1, 1},
   {&__pyx_n_s_swaplevel, __pyx_k_swaplevel, sizeof(__pyx_k_swaplevel), 0, 0, 1, 1},
   {&__pyx_n_s_t, __pyx_k_t, sizeof(__pyx_k_t), 0, 0, 1, 1},
@@ -12011,6 +12361,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
   __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(5, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_steady_spike_train, 385, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(1, 385, __pyx_L1_error)
+
+  /* "matsim/matsim.pyx":411
+ *     return spike_trains
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):             # <<<<<<<<<<<<<<
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+ *     spike_trains = {}
+ */
+  __pyx_tuple__25 = PyTuple_Pack(12, __pyx_n_s_neuron, __pyx_n_s_time, __pyx_n_s_dt, __pyx_n_s_mat_names, __pyx_n_s_spike_trains, __pyx_n_s_spike_times, __pyx_n_s_mat, __pyx_n_s_tot_time, __pyx_n_s_i, __pyx_n_s_name, __pyx_n_s_name, __pyx_n_s_t); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 411, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(3, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_matsim_pyx, __pyx_n_s_steady_spike_train_mc, 411, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(1, 411, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -12449,6 +12811,18 @@ if (!__Pyx_RefNanny) {
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_5steady_spike_train, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 385, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_steady_spike_train, __pyx_t_1) < 0) __PYX_ERR(1, 385, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "matsim/matsim.pyx":411
+ *     return spike_trains
+ * 
+ * def steady_spike_train_mc(MCNeuron neuron, double time, double dt):             # <<<<<<<<<<<<<<
+ *     mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+ *     spike_trains = {}
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6matsim_6matsim_7steady_spike_train_mc, NULL, __pyx_n_s_matsim_matsim); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 411, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_steady_spike_train_mc, __pyx_t_1) < 0) __PYX_ERR(1, 411, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "matsim/matsim.pyx":1

@@ -407,3 +407,22 @@ def steady_spike_train(Neuron neuron, double time, double dt, exc, inh):
         spike_trains[name] = np.array([t for t in spike_times])
 
     return spike_trains
+
+def steady_spike_train_mc(MCNeuron neuron, double time, double dt):
+    mat_names = [name.decode("utf-8") for name in neuron.mat_names]
+    spike_trains = {}
+    cdef vector[double] spike_times
+    cdef CMATThresholds* mat
+
+    cdef double tot_time = 0
+    while tot_time < time:
+        neuron.timestep(dt)
+        tot_time += dt
+
+    for i, name in enumerate(mat_names):
+        mat = neuron.neuron.mats[i]
+        spike_times = deref(mat).get_spike_times()
+        deref(mat).reset_spike_times()
+        spike_trains[name] = np.array([t for t in spike_times])
+
+    return spike_trains
