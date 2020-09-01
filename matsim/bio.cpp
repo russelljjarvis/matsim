@@ -45,6 +45,18 @@ void Conductance::set_g(double g) { }
 double Conductance::get_reversal() {return 0;}
 void Conductance::activate() { }
 
+ConstantConductance::ConstantConductance() {}
+double ConstantConductance::get_g() {return this->g;}
+void ConstantConductance::set_g(double g) {this->g = g;}
+double ConstantConductance::get_reversal() {return this->reversal;}
+
+ConstantConductance::ConstantConductance(double g, double reversal) {
+	this->g = g;
+	this->reversal = reversal;
+}
+
+void ConstantConductance::update(double dt) { }
+
 ExponentialConductance::ExponentialConductance() {}
 double ExponentialConductance::get_g() {return this->g;}
 void ExponentialConductance::set_g(double g) {this->g = g;}
@@ -192,16 +204,24 @@ void Neuron::append_conductance(Conductance* conductance) {
 }
 
 void Neuron::integrate_voltage(double dt) {
-	double tot_conductance = 0;
-	double tot_gr = 0;
+	double tot_conductance = 1. / membrane_resistance;
+	double tot_gr = resting_potential / membrane_resistance;
+	double tot_current = 0;
 	double factor, v_bar, tau;
+	double rev;
 
 	for (auto c : conductances) {
-		tot_conductance += c->get_g();
-		tot_gr += c->get_g() * c->get_reversal();
+		rev = c->get_reversal();
+		if (rev > 999) {
+			tot_gr += c->get_g();
+		}
+		else {
+			tot_conductance += c->get_g();
+			tot_gr += c->get_g() * rev;
+		}
 	}
 
-	v_bar = (resting_potential + membrane_resistance * tot_gr) / (1 + membrane_resistance * tot_conductance);
+	v_bar = tot_gr / tot_conductance;
 	tau = time_constant / (1 + membrane_resistance * tot_conductance);
 
 	voltage = v_bar + (voltage - v_bar) * exp(-dt / tau);

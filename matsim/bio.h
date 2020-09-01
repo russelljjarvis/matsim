@@ -14,6 +14,18 @@ class Conductance {
 		virtual double get_reversal();
 };
 
+class ConstantConductance: public Conductance {
+	double g, reversal;
+
+	public:
+		ConstantConductance();
+		ConstantConductance(double, double);
+		void update(double);
+		double get_g();
+		void set_g(double);
+		double get_reversal();
+};
+
 class ExponentialConductance: public Conductance {
 	double g_peak, decay, g, reversal;
 

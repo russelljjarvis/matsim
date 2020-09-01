@@ -5,6 +5,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from cython.operator cimport dereference as deref
 from .matsim_cth cimport ExponentialConductance as CExponentialConductance
+from .matsim_cth cimport ConstantConductance as CConstantConductance
 from .matsim_cth cimport ShotNoiseConductance as CShotNoiseConductance
 from .matsim_cth cimport OUConductance as COUConductance
 from .matsim_cth cimport Conductance as CConductance
@@ -17,6 +18,7 @@ from .matsim_cth cimport sr_experiment_spike_times as _sr_experiment_spike_times
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 
 # Create a Cython extension type which holds a C++ instance
 # as an attribute and create a bunch of forwarding methods
@@ -37,6 +39,29 @@ cdef class Conductance:
 
     def set_g(self, g):
         deref(self.conductance).set_g(g)
+
+cdef class ConstantConductance(Conductance):
+    cdef double g, reversal
+
+    def __cinit__(self, double g, double reversal):
+        self.g = g
+        self.reversal = reversal
+        self.conductance = new CConstantConductance(g, reversal)
+
+    def __dealloc__(self):
+        del self.conductance
+    
+    def get_params(self):
+        return self.g, self.reversal
+    
+    def copy(self):
+#         new_conductance = ExponentialConductance(self.g_peak, selßf.reversal, self.decay)
+        new_conductance = ConstantConductance(self.g, self.reversal)
+        new_conductance.set_g(self.g)
+        return new_conductance
+    
+    # def create_conductance(self):
+    #     return self.__cinit__(0.005, -100, 100)
 
 cdef class ExponentialConductance(Conductance):
     cdef double g_peak, reversal, decay
