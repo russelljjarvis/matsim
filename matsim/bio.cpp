@@ -222,7 +222,9 @@ void Neuron::integrate_voltage(double dt) {
 	}
 
 	v_bar = tot_gr / tot_conductance;
-	tau = time_constant / (1 + membrane_resistance * tot_conductance);
+	// cout<<v_bar<<endl;
+	// tau = time_constant / (1 + membrane_resistance * tot_conductance);
+	tau = membrane_capacitance / tot_conductance;
 
 	voltage = v_bar + (voltage - v_bar) * exp(-dt / tau);
 }
